@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ul { @apply list-disc list-inside }
+ol { @apply list-decimal list-inside }
+
+.line-1 { @apply break-words line-clamp-1 }                                                          
+.line-2 { @apply break-words line-clamp-2 }
+.line-3 { @apply break-words line-clamp-3 }
+
+.f-c { @apply flex items-center }
+.f-s { @apply flex items-start }
+.f-e { @apply flex items-end }
+.f-c-c { @apply flex items-center justify-center }
+.f-c-e { @apply flex items-center justify-end }
+.f-c-a { @apply flex items-center justify-around }
+.f-c-b { @apply flex items-center justify-between }
+
+input, button, select, textarea {
+  outline: none !important
+}
+textarea {
+  resize: none !important
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none
+}
+.member-form,.rpo-form input[type="number"] {
+  -moz-appearance: textfield
+}

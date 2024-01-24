@@ -1,0 +1,250 @@
+{
+    "root": {
+        "data": {
+            "id": "cymp08gmnvk0",
+            "created": 1706074698283,
+            "text": "IDC"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "cymp1p5uti00",
+                    "created": 1706074813001,
+                    "text": "医务中心 medical"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "cymp286r17s0",
+                            "created": 1706074854414,
+                            "text": "指南统计 guide"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "cymp2jgb0y80",
+                                    "created": 1706074878936,
+                                    "text": "指南明细 details"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "cymp2eqxsvs0",
+                            "created": 1706074868695,
+                            "text": "医院统计 hospital"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "cymp2o4zx400",
+                                    "created": 1706074889137,
+                                    "text": "医院日统计 day"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "cymp2roapwg0",
+                                    "created": 1706074896834,
+                                    "text": "医院月统计 month"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "cymp2fz4c6w0",
+                            "created": 1706074871367,
+                            "text": "医生统计 doctor"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "cymp2u95vxc0",
+                                    "created": 1706074902449,
+                                    "text": "医生日统计 day"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "cymp2wu52qw0",
+                                    "created": 1706074908071,
+                                    "text": "医生月统计 month"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "cymp1yqpcgw0",
+                    "created": 1706074833853,
+                    "text": "订单中心 order"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "cymp356srrk0",
+                            "created": 1706074926251,
+                            "text": "订单统计 stat"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "cymp38foruw0",
+                                    "created": 1706074933319,
+                                    "text": "订单明细  details"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "cymp3anle3k0",
+                                    "created": 1706074938150,
+                                    "text": "订单日统计 day"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "cymp3cdkow00",
+                                    "created": 1706074941898,
+                                    "text": "订单月统计 month"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "cymp20on18o0",
+                    "created": 1706074838081,
+                    "text": "财务中心 finance"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "cymp3hfb1yo0",
+                            "created": 1706074952887,
+                            "text": "医院财务 hospital"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "cymp6osgrmw0",
+                                    "created": 1706075204012,
+                                    "text": "医院日收入 day"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "cymp6sihykg0",
+                                    "created": 1706075212117,
+                                    "text": "医院月收入 month"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "cymp3khu7cg0",
+                            "created": 1706074959570,
+                            "text": "医生财务 doctor"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "cymp6uw4hsw0",
+                                    "created": 1706075217294,
+                                    "text": "医生日收入 day"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "cymp6x0zjmg0",
+                                    "created": 1706075221942,
+                                    "text": "医生月收入 month"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "cymp3lt9qmg0",
+                            "created": 1706074962438,
+                            "text": "平台财务 platform "
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "cymp72rfqw80",
+                                    "created": 1706075234425,
+                                    "text": "平台日收入 day"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "cymp761emq80",
+                                    "created": 1706075241558,
+                                    "text": "平台月收入 month"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "cymp237erhs0",
+                    "created": 1706074843570,
+                    "text": "系统管理 system"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "cymp3opc95s0",
+                            "created": 1706074968731,
+                            "text": "权限管理 permission"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "cymp3td8ryw0",
+                                    "created": 1706074978883,
+                                    "text": "角色管理 role"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "cymp3uyinpc0",
+                                    "created": 1706074982346,
+                                    "text": "账号管理 account"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "classic",
+    "version": "1.4.43"
+}
