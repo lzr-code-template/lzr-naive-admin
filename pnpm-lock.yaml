@@ -14,6 +14,9 @@ dependencies:
   element-plus:
     specifier: ^2.5.3
     version: 2.5.3(vue@3.4.15)
+  mitt:
+    specifier: ^3.0.1
+    version: 3.0.1
   vue:
     specifier: ^3.3.11
     version: 3.4.15(typescript@5.3.3)
@@ -50,8 +53,8 @@ devDependencies:
     specifier: ~5.3.0
     version: 5.3.3
   unplugin-auto-import:
-    specifier: ^0.17.3
-    version: 0.17.3(@vueuse/core@10.7.2)
+    specifier: ^0.17.4
+    version: 0.17.4(@vueuse/core@10.7.2)
   unplugin-vue-components:
     specifier: ^0.26.0
     version: 0.26.0(vue@3.4.15)
@@ -1348,6 +1351,10 @@ packages:
     engines: {node: '>=16 || 14 >=14.17'}
     dev: true
 
+  /mitt@3.0.1:
+    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
+    dev: false
+
   /mlly@1.5.0:
     resolution: {integrity: sha512-NPVQvAY1xr1QoVeG0cy8yUYC7FQcOx6evl/RjT1wL5FvzPnzOysoqB/jmx/DhssT2dYa8nxECLAaFI/+gVLhDQ==}
     dependencies:
@@ -1862,8 +1869,8 @@ packages:
       - rollup
     dev: true
 
-  /unplugin-auto-import@0.17.3(@vueuse/core@10.7.2):
-    resolution: {integrity: sha512-0cn0wr8X579TtdZKUAps0dDVrYzttx38ImdxZjmCeNlMDJX8UuSjO83vFqgS4ClNDIGWAute+xl9j5vRSX+vsw==}
+  /unplugin-auto-import@0.17.4(@vueuse/core@10.7.2):
+    resolution: {integrity: sha512-sInr7+UOeFMtiRCr7lYZXouTnVqXNUJtN5yN5GDzg6Sr2rwY5ZWZmqf4yvItYCm8mq1PdzPw3oojYHgZAJnTRQ==}
     engines: {node: '>=14'}
     peerDependencies:
       '@nuxt/kit': ^3.2.2

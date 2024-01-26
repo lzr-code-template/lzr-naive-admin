@@ -1,19 +1,20 @@
 import { RouteRecordRaw } from 'vue-router'
 
-interface Meta {
+interface Breadcrumb {
+  title: string
   name: string
-  icon?: string
-  customIcon?: string
-  order?: number
-  role?: Array<string>
-  requireAuth?: boolean
+}
+
+interface Meta {
+  classList: string[]
+  breadcrumb?: Breadcrumb[]
+  keepAlive: Boolean
 }
 
 interface RouteItem {
   name?: string
   path: string
   redirect?: string
-  isHidden?: boolean
   meta?: Meta,
   children?: RoutesType
 }

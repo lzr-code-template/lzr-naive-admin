@@ -1,29 +1,34 @@
 <template>
-  <div class="shrink-0 h-16 bg-gray-900 text-white f-c z-50 pr-4">
+  <div class="shrink-0 h-16 bg-gray-900 text-white f-c z-50 pr-4 border-b border-gray-700">
     <!-- 左侧按钮 -->
     <div class="grow h-full f-c">
       <!-- 首页logo -->
-      <button class="w-64 h-full hover:bg-gray-700 hover:border-x border-gray-500">
+      <button 
+        class="w-64 h-full hover:bg-gray-700/80"
+        :class="{ 'bg-gray-700 border-x border-x-gray-500': !navKey }"
+      >
         <h1>IDC（数据服务系统）</h1>
       </button>
       <!-- 循环头部菜单 -->
       <button
-        v-for="item in headerList"
+        v-for="item in navList"
         :key="item.key"
-        class="w-32 h-full hover:bg-gray-700 hover:border-x border-gray-500 f-c-c space-x-2"
+        class="w-32 h-full hover:bg-gray-700/80 border-gray-500 f-c-c space-x-2"
+        :class="{ 'bg-gray-700 border-x border-x-gray-500': item.key === navKey }"
       >
         <component :is="item.icon" class="w-5 h-5" />
         <span class="text-sm">{{ item.label }}</span>
       </button>
-      
     </div>
     <!-- 右侧按钮 -->
     <div class="shrink-0 f-c space-x-5">
       <!-- 全屏切换 -->
       <button class="w-8 h-8" @click="toggle">
         <el-tooltip content="全屏切换">
-          <ArrowsPointingInIcon v-if="isFullscreen" class="w-5 h-5" />
-          <ArrowsPointingOutIcon v-else class="w-5 h-5" />
+          <component 
+            :is="isFullscreen ? ArrowsPointingInIcon : ArrowsPointingOutIcon" 
+            class="w-5 h-5" 
+          />
         </el-tooltip>
       </button>
       <!-- 头像 -->
@@ -61,24 +66,34 @@
 </template>
 
 <script setup lang="ts">
-import { 
-  AcademicCapIcon, 
-  DocumentTextIcon, 
-  CircleStackIcon, 
-  WrenchScrewdriverIcon, 
+import {
+  AcademicCapIcon,
+  DocumentTextIcon,
+  CircleStackIcon,
+  WrenchScrewdriverIcon,
   ArrowsPointingOutIcon, 
-  ArrowsPointingInIcon 
+  ArrowsPointingInIcon
 } from '@heroicons/vue/24/outline'
 import { UserIcon, ChevronDownIcon } from '@heroicons/vue/24/solid'
 import { useFullscreen } from '@vueuse/core'
+import type { NavListType } from '@/types/layout.ts'
+
+const route = useRoute()
+const router = useRouter()
+console.log(route.meta.classList)
 
 /* 头部菜单列表 */
-const headerList = [
+const navKey = ref<string>( useRoute().meta.classList[0] || '')
+const navList:NavListType = [
   { label: '医务中心', key: 'medical', icon: AcademicCapIcon },
   { label: '订单中心', key: 'order', icon: DocumentTextIcon },
-  { label: '财务中心', key: 'medical', icon: CircleStackIcon },
-  { label: '系统管理', key: 'medical', icon: WrenchScrewdriverIcon },
+  { label: '财务中心', key: 'finance', icon: CircleStackIcon },
+  { label: '系统管理', key: 'system', icon: WrenchScrewdriverIcon },
 ]
+const changeNav = (key:string):void => {
+  navKey.value = key
+  if (!key) router.push('/')
+}
 /* 全屏切换 */
 const { isFullscreen, toggle } = useFullscreen()
 /* 退出登录 */
