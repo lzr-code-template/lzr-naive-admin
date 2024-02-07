@@ -7,7 +7,12 @@ export default {
     "./src/**/*.{vue,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'login': "url('/src/assets/images/login.webp')",
+        'report': "url('/src/assets/images/report.png')",
+      }
+    },
     colors: {
       white: colors.white,
       black: colors.black,

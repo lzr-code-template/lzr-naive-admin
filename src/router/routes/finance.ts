@@ -4,7 +4,10 @@ export default [
     path: '/finance-hospital-day',
     name: 'FinanceHospitalDay',
     component: () => import('@/views/finance/hospital/day/index.vue'),
-    meta: { 
+    meta: {
+      class1: 'finance',
+      class2: 'hospital',
+      class3: 'day',
       classList: ['finance', 'hospital', 'day'],
       breadcrumb: [
         { title: '医务中心', name: '' },
@@ -20,6 +23,9 @@ export default [
     name: 'FinanceHospitalMonth',
     component: () => import('@/views/finance/hospital/month/index.vue'),
     meta: {
+      class1: 'finance',
+      class2: 'hospital',
+      class3: 'month',
       classList: ['finance', 'hospital', 'month'],
       breadcrumb: [
         { title: '医务中心', name: '' },
@@ -34,7 +40,10 @@ export default [
     path: '/finance-doctor-day',
     name: 'FinanceDoctorDay',
     component: () => import('@/views/finance/doctor/day/index.vue'),
-    meta: { 
+    meta: {
+      class1: 'finance',
+      class2: 'doctor',
+      class3: 'day',
       classList: ['finance', 'doctor', 'day'],
       breadcrumb: [
         { title: '医务中心', name: '' }, 
@@ -50,6 +59,9 @@ export default [
     name: 'FinanceDoctorMonth',
     component: () => import('@/views/finance/doctor/month/index.vue'),
     meta: {
+      class1: 'finance',
+      class2: 'doctor',
+      class3: 'month',
       classList: ['finance', 'doctor', 'month'],
       breadcrumb: [
         { title: '医务中心', name: '' }, 
@@ -65,6 +77,9 @@ export default [
     name: 'FinancePlatformDay',
     component: () => import('@/views/finance/platform/day/index.vue'),
     meta: { 
+      class1: 'finance',
+      class2: 'platform',
+      class3: 'day',
       classList: ['finance', 'platform', 'day'],
       breadcrumb: [
         { title: '医务中心', name: '' }, 
@@ -80,6 +95,9 @@ export default [
     name: 'FinancePlatformMonth',
     component: () => import('@/views/finance/platform/month/index.vue'),
     meta: {
+      class1: 'finance',
+      class2: 'platform',
+      class3: 'month',
       classList: ['finance', 'platform', 'month'],
       breadcrumb: [
         { title: '医务中心', name: '' },

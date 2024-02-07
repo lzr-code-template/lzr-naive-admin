@@ -3,9 +3,10 @@
     <!-- 左侧按钮 -->
     <div class="grow h-full f-c">
       <!-- 首页logo -->
-      <button 
-        class="w-64 h-full hover:bg-gray-700/80"
+      <button
+        class="w-[255px] h-full hover:bg-gray-700/80"
         :class="{ 'bg-gray-700 border-x border-x-gray-500': !navKey }"
+        @click="changeNav('main')"
       >
         <h1>IDC（数据服务系统）</h1>
       </button>
@@ -15,6 +16,7 @@
         :key="item.key"
         class="w-32 h-full hover:bg-gray-700/80 border-gray-500 f-c-c space-x-2"
         :class="{ 'bg-gray-700 border-x border-x-gray-500': item.key === navKey }"
+        @click="changeNav(item.key)"
       >
         <component :is="item.icon" class="w-5 h-5" />
         <span class="text-sm">{{ item.label }}</span>
@@ -37,13 +39,16 @@
           <div class="w-8 h-8 bg-gray-700 rounded-full f-c-c">
             <UserIcon class="w-5 h-5 text-gray-300" />
           </div>
-          <p class="ml-3 mr-2 text-white">用户名</p>
+          <p class="ml-3 mr-2 text-white">{{ user.name }}</p>
           <ChevronDownIcon class="w-4 h-4 text-white" />
         </button>
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item>
-              <div class="flex items-center space-x-2">
+              <div 
+                class="flex items-center space-x-2"
+                @click="$router.push('/')"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                 </svg>
@@ -51,7 +56,10 @@
               </div>
             </el-dropdown-item>
             <el-dropdown-item>
-              <div class="flex items-center space-x-2">
+              <div 
+                class="flex items-center space-x-2"
+                @click="logout"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
                 </svg>
@@ -66,6 +74,7 @@
 </template>
 
 <script setup lang="ts">
+import emitter from '@/until/mitt'
 import {
   AcademicCapIcon,
   DocumentTextIcon,
@@ -80,10 +89,15 @@ import type { NavListType } from '@/types/layout.ts'
 
 const route = useRoute()
 const router = useRouter()
-console.log(route.meta.classList)
+const $cookies = inject<any>('$cookies')
+const user = $cookies.get('user')
+
+watch(() => route.path, () => {
+  navKey.value = route.meta.class1 as string
+})
 
 /* 头部菜单列表 */
-const navKey = ref<string>( useRoute().meta.classList[0] || '')
+const navKey = ref<string>( route.meta.class1 as string )
 const navList:NavListType = [
   { label: '医务中心', key: 'medical', icon: AcademicCapIcon },
   { label: '订单中心', key: 'order', icon: DocumentTextIcon },
@@ -92,9 +106,18 @@ const navList:NavListType = [
 ]
 const changeNav = (key:string):void => {
   navKey.value = key
-  if (!key) router.push('/')
+  emitter.emit('changeNav', key)
+  if (key === 'main') router.push('/')
 }
 /* 全屏切换 */
 const { isFullscreen, toggle } = useFullscreen()
 /* 退出登录 */
+const logout = () => {
+  ElMessageBox.confirm('您确定要退出登录吗?', '提示').then(() => {
+    $cookies.remove('user')
+    $cookies.remove('token')
+    ElMessage({ type: 'success', message: '成功退出登录' })
+    router.replace('/account/login')
+  }).catch(() => {})
+}
 </script>

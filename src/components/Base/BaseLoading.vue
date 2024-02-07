@@ -1,12 +1,13 @@
 <template>
-  <div class="f-c-c" :style="{ minHeight: `${clientHeight - 275}px` }">
+  <div class="f-c-c" :style="{ minHeight: `${clientHeight - 143}px` }">
     <div class="loading-wrap">
       <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { useWindowSize } from '@vueuse/core'
 const clientHeight = useWindowSize().height
 </script>
 

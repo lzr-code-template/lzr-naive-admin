@@ -6,6 +6,9 @@ export default [
     name: 'SystemPermissionRole',
     component: () => import('@/views/system/permission/role/index.vue'),
     meta: { 
+      class1: 'system',
+      class2: 'permission',
+      class3: 'role',
       classList: ['system', 'permission', 'role'],
       breadcrumb: [
         { title: '系统管理', name: '' }, 
@@ -21,6 +24,9 @@ export default [
     name: 'SystemPermissionRoleAdd',
     component: () => import('@/views/system/permission/role/add.vue'),
     meta: { 
+      class1: 'system',
+      class2: 'permission',
+      class3: 'role',
       classList: ['system', 'permission', 'role'],
       breadcrumb: [
         { title: '系统管理', name: '' }, 
@@ -37,6 +43,9 @@ export default [
     name: 'SystemPermissionRoleEdit',
     component: () => import('@/views/system/permission/role/edit.vue'),
     meta: { 
+      class1: 'system',
+      class2: 'permission',
+      class3: 'role',
       classList: ['system', 'permission', 'role'],
       breadcrumb: [
         { title: '系统管理', name: '' }, 
@@ -54,6 +63,9 @@ export default [
     name: 'SystemPermissionAccount',
     component: () => import('@/views/system/permission/account/index.vue'),
     meta: { 
+      class1: 'system',
+      class2: 'permission',
+      class3: 'account',
       classList: ['system', 'permission', 'account'],
       breadcrumb: [
         { title: '系统管理', name: '' }, 
@@ -68,7 +80,10 @@ export default [
     path: '/system-permission-account/add',
     name: 'SystemPermissionAccountAdd',
     component: () => import('@/views/system/permission/account/add.vue'),
-    meta: { 
+    meta: {
+      class1: 'system',
+      class2: 'permission',
+      class3: 'account',
       classList: ['system', 'permission', 'account'],
       breadcrumb: [
         { title: '系统管理', name: '' }, 
@@ -84,7 +99,10 @@ export default [
     path: '/system-permission-account/edit/:id',
     name: 'SystemPermissionAccountEdit',
     component: () => import('@/views/system/permission/account/edit.vue'),
-    meta: { 
+    meta: {
+      class1: 'system',
+      class2: 'permission',
+      class3: 'account',
       classList: ['system', 'permission', 'account'],
       breadcrumb: [
         { title: '系统管理', name: '' }, 

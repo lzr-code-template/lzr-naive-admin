@@ -6,8 +6,11 @@
       <!-- 侧边栏（sidebar） -->
       <SideBar />
       <!-- 内容区域（content） -->
-      <div class="grow">
-        <router-view></router-view>
+      <div class="grow flex flex-col overflow-hidden">
+        <CrumbBar />
+        <div class="p-4 grow overflow-hidden">
+          <AppMain />
+        </div>
       </div>
     </div>
   </div>
@@ -16,4 +19,6 @@
 <script setup lang="ts">
 import NavBar from './NavBar.vue'
 import SideBar from './SideBar.vue'
+import CrumbBar from './CrumbBar.vue'
+import AppMain from './AppMain.vue'
 </script>

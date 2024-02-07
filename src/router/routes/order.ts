@@ -6,6 +6,9 @@ export default [
     name: 'OrderStatDetails',
     component: () => import('@/views/order/stat/details/index.vue'),
     meta: {
+      class1: 'order',
+      class2: 'stat',
+      class3: 'details',
       classList: ['order', 'stat', 'details'],
       breadcrumb: [
         { title: '订单中心', name: '' }, 
@@ -21,6 +24,9 @@ export default [
     name: 'OrderStatDetailsDetail',
     component: () => import('@/views/order/stat/details/detail.vue'),
     meta: {
+      class1: 'order',
+      class2: 'stat',
+      class3: 'details',
       classList: ['order', 'guide', 'details'],
       breadcrumb: [
         { title: '订单中心', name: '' },
@@ -37,6 +43,9 @@ export default [
     name: 'OrderStatDay',
     component: () => import('@/views/order/stat/day/index.vue'),
     meta: { 
+      class1: 'order',
+      class2: 'stat',
+      class3: 'day',
       classList: ['order', 'stat', 'day'],
       breadcrumb: [
         { title: '订单中心', name: '' },
@@ -52,6 +61,9 @@ export default [
     name: 'OrderStatMonth',
     component: () => import('@/views/order/stat/month/index.vue'),
     meta: {
+      class1: 'order',
+      class2: 'stat',
+      class3: 'month',
       classList: ['order', 'stat', 'month'],
       breadcrumb: [
         { title: '订单中心', name: '' },

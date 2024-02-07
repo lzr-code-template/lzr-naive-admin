@@ -17,6 +17,18 @@ ol { @apply list-decimal list-inside }
 .f-c-a { @apply flex items-center justify-around }
 .f-c-b { @apply flex items-center justify-between }
 
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+.slide-fade-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
 input, button, select, textarea {
   outline: none !important
 }

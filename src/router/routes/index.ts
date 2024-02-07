@@ -1,23 +1,34 @@
 import type { RouteModule, RouteType, RoutesType } from '@/types/router.ts'
 import Layout from '@/components/Layout/index.vue'
 import ErrorPage from '@/views/error-page/404.vue'
-import medical from './medical.ts'
-import order from './order.ts'
-import finance from './finance.ts'
-import system from './system.ts'
+import medical from './medical'
+import order from './order'
+import finance from './finance'
+import system from './system'
 
 export const basicRoutes: RoutesType = [
   {
     path: '/',
     redirect: '/main',
   },
+  /** ----- 登录页 ----- **/
+  {
+    path: '/account/login',
+    name: 'Login',
+    component:() => import('@/views/account/login/index.vue')
+  },
+  /** ----- 后台内容 ----- **/
   {
     path: '/main',
     component: Layout,
     redirect: '/home',
     meta: {
-      classList: ['', '', ''],
-      keepAlive: true
+      class1: 'main',
+      class2: 'home',
+      class3: 'index',
+      classList: ['main', 'home', 'index'],
+      breadcrumb: [{ title: '', name: '' }],
+      keepAlive: false
     },
     children: [
       /** ----- 首页 ----- **/
