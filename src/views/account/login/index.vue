@@ -76,7 +76,6 @@ import type { LoginInter } from '@/types/login.ts'
 const router = useRouter()
 const $cookies = inject<any>('$cookies')
 
-console.log($cookies)
 const btnLoading = ref<boolean>(false)
 const loginInfo: LoginInter = reactive({
   phone: '',
