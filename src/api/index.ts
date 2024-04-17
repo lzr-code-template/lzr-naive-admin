@@ -2,7 +2,6 @@ import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, CustomParamsSerializer } from 'axios'
 import router from '@/router'
 import { stringify, parse } from 'qs'
-import { ElMessage, ElMessageBox } from 'element-plus'
 
 const defaultConfig: AxiosRequestConfig = {
   baseURL: import.meta.env.VITE_APP_URL,
@@ -36,7 +35,7 @@ http.interceptors.response.use(
       return res.data
     }
     if (res.data.code === 404) {
-      ElMessage({ message: res.data.msg, type: 'warning'})
+      // ElMessage({ message: res.data.msg, type: 'warning'})
       return res.data
     }
   },
@@ -44,12 +43,12 @@ http.interceptors.response.use(
     if (error.response.status === 401 && $cookies.get('token')) {
       $cookies.remove('user')
       $cookies.remove('token')
-      ElMessageBox.alert('登录超时，请重新登录', '提示', {
-        type: 'info', 
-        showClose: false, 
-        confirmButtonText: '确定', 
-        callback:() => router.replace('/account/login')
-      })
+      // ElMessageBox.alert('登录超时，请重新登录', '提示', {
+      //   type: 'info', 
+      //   showClose: false, 
+      //   confirmButtonText: '确定', 
+      //   callback:() => router.replace('/account/login')
+      // })
     } else {
       return Promise.reject(error)
     }
@@ -57,11 +56,11 @@ http.interceptors.response.use(
 )
 
 interface ApiInter {  
-  get: (url: string, params?: any, useQs?: boolean) => Promise<any>;  
-  getBlob: (url: string, params?: any) => Promise<any>;  
-  post: (url: string, params?: any, useQs?: boolean) => Promise<any>;  
-  put: (url: string, params?: any, useQs?: boolean) => Promise<any>;  
-  delete: (url: string, params?: any) => Promise<any>;  
+  get: (url: string, params?: any, useQs?: boolean) => Promise<any>
+  getBlob: (url: string, params?: any) => Promise<any>
+  post: (url: string, params?: any, useQs?: boolean) => Promise<any>
+  put: (url: string, params?: any, useQs?: boolean) => Promise<any>
+  delete: (url: string, params?: any) => Promise<any>
 }  
   
 const api: ApiInter = {  

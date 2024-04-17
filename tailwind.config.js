@@ -16,17 +16,18 @@ export default {
     colors: {
       white: colors.white,
       black: colors.black,
+      blue: colors.blue,
       gray: colors.gray,
       't3': '#303133',
       't2': '#606266',
       't1': '#909399',
       'placeholder': '#A8ABB2',
       'disabled': '#c0c4cc',
-      'primary': '#409eff',
-      'success': '#67c23a',
-      'warning': '#e6a23c',
-      'error': '#f56c6c',
-      'info': '#909399'
+      'primary': '#0064C8',
+      'success': '#47B3AA',
+      'warning': '#F0A020',
+      'error': '#ef4444',
+      'info': '#2080F0'
     }
   },
   plugins: [],

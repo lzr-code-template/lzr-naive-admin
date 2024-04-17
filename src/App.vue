@@ -1,10 +1,11 @@
 <template>
-  <el-config-provider :locale="zhCn">
-    <router-view />
-  </el-config-provider>
+  <AppProvider>
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
+  </AppProvider>
 </template>
 
-<script setup lang="ts">
-import { ElConfigProvider } from 'element-plus'
-import zhCn from "element-plus/dist/locale/zh-cn.mjs"
+<script setup>
+import AppProvider from '@/components/Common/AppProvider.vue'
 </script>

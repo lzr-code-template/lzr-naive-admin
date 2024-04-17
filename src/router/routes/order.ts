@@ -1,76 +1,22 @@
 export default [
-  /** ----- 订单统计 -> 订单明细 ----- **/
-  // ---- 列表 ----
+  /** ----- 订单中心 -> 订单列表 ----- **/
   {
-    path: '/order-stat-details',
-    name: 'OrderStatDetails',
-    component: () => import('@/views/order/stat/details/index.vue'),
+    path: '/order/order',
+    name: 'OrderOrder',
+    component: () => import('@/views/order/order/index.vue'),
     meta: {
-      class1: 'order',
-      class2: 'stat',
-      class3: 'details',
-      classList: ['order', 'stat', 'details'],
-      breadcrumb: [
-        { title: '订单中心', name: '' }, 
-        { title: '订单统计', name: '' }, 
-        { title: '订单明细', name: 'OrderStatDetails' }
-      ],
+      name: 'OrderOrder',
       keepAlive: true
     }
   },
-  // ---- 详情 ----
+  /** ----- 订单中心 -> 订单详情 ----- **/
   {
-    path: '/order-stat-details/detail/:id',
-    name: 'OrderStatDetailsDetail',
-    component: () => import('@/views/order/stat/details/detail.vue'),
+    path: '/order/order/detail/:id',
+    name: 'OrderOrderListDetail',
+    component: () => import('@/views/order/order/detail.vue'),
     meta: {
-      class1: 'order',
-      class2: 'stat',
-      class3: 'details',
-      classList: ['order', 'guide', 'details'],
-      breadcrumb: [
-        { title: '订单中心', name: '' },
-        { title: '订单统计', name: '' },
-        { title: '订单明细', name: 'OrderStatDetails' },
-        { title: '订单详情', name: 'OrderStatDetailsDetail' }
-      ],
-      keepAlive: false
-    }
-  },
-  /** ----- 订单统计 -> 订单日统计 ----- **/
-  {
-    path: '/order-stat-day',
-    name: 'OrderStatDay',
-    component: () => import('@/views/order/stat/day/index.vue'),
-    meta: { 
-      class1: 'order',
-      class2: 'stat',
-      class3: 'day',
-      classList: ['order', 'stat', 'day'],
-      breadcrumb: [
-        { title: '订单中心', name: '' },
-        { title: '订单统计', name: '' },
-        { title: '订单日统计', name: 'OrderStatDay' }
-      ],
+      name: 'OrderOrder',
       keepAlive: true
     }
-  },
-  /** ----- 订单统计 -> 订单月统计 ----- **/
-  {
-    path: '/order-stat-month',
-    name: 'OrderStatMonth',
-    component: () => import('@/views/order/stat/month/index.vue'),
-    meta: {
-      class1: 'order',
-      class2: 'stat',
-      class3: 'month',
-      classList: ['order', 'stat', 'month'],
-      breadcrumb: [
-        { title: '订单中心', name: '' },
-        { title: '订单统计', name: '' },
-        { title: '订单月统计', name: 'OrderStatMonth' }
-      ],
-      keepAlive: true
-    }
-  },
+  }
 ]

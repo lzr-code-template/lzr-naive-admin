@@ -1,116 +1,42 @@
 export default [
-  /** ----- 权限管理 -> 角色管理 ----- **/
-  // ---- 列表 ----
+  /** ----- 系统管理 -> 角色管理 ----- **/
   {
-    path: '/system-permission-role',
-    name: 'SystemPermissionRole',
-    component: () => import('@/views/system/permission/role/index.vue'),
-    meta: { 
-      class1: 'system',
-      class2: 'permission',
-      class3: 'role',
-      classList: ['system', 'permission', 'role'],
-      breadcrumb: [
-        { title: '系统管理', name: '' }, 
-        { title: '权限管理', name: '' }, 
-        { title: '角色管理', name: 'SystemPermissionRole' }
-      ],
+    path: '/system/role',
+    name: 'SystemRole',
+    component: () => import('@/views/system/role/index.vue'),
+    meta: {
+      name: 'SystemRole',
       keepAlive: true
     }
   },
-  // ---- 添加 ----
+  // 系统管理 - 角色管理 - 添加
   {
-    path: '/system-permission-role/add',
-    name: 'SystemPermissionRoleAdd',
-    component: () => import('@/views/system/permission/role/add.vue'),
+    path: '/system/role/add',
+    name: 'SystemRoleAdd',
+    component:() => import('@/views/system/role/add.vue'),
     meta: { 
-      class1: 'system',
-      class2: 'permission',
-      class3: 'role',
-      classList: ['system', 'permission', 'role'],
-      breadcrumb: [
-        { title: '系统管理', name: '' }, 
-        { title: '权限管理', name: '' }, 
-        { title: '角色管理', name: 'SystemPermissionRole' },
-        { title: '添加', name: 'SystemPermissionRoleAdd' }
-      ],
+      name: 'SystemRole',
       keepAlive: false
     }
   },
-  // ---- 编辑 ----
+  // 系统管理 - 角色管理 - 编辑 
   {
-    path: '/system-permission-role/edit/:id',
-    name: 'SystemPermissionRoleEdit',
-    component: () => import('@/views/system/permission/role/edit.vue'),
+    path: '/system/role/edit/:id',
+    name: 'SystemRoleEdit',
+    component:() => import('@/views/system/role/edit.vue'),
     meta: { 
-      class1: 'system',
-      class2: 'permission',
-      class3: 'role',
-      classList: ['system', 'permission', 'role'],
-      breadcrumb: [
-        { title: '系统管理', name: '' }, 
-        { title: '权限管理', name: '' }, 
-        { title: '角色管理', name: 'SystemPermissionRole' },
-        { title: '编辑', name: 'SystemPermissionRoleEdit' }
-      ],
+      name: 'SystemRole',
       keepAlive: false
     }
   },
-  /** ----- 权限管理 -> 账号管理 ----- **/
-  // ---- 列表 ----
+  /** ----- 系统管理 -> 账号管理 ----- **/
   {
-    path: '/system-permission-account',
-    name: 'SystemPermissionAccount',
-    component: () => import('@/views/system/permission/account/index.vue'),
-    meta: { 
-      class1: 'system',
-      class2: 'permission',
-      class3: 'account',
-      classList: ['system', 'permission', 'account'],
-      breadcrumb: [
-        { title: '系统管理', name: '' }, 
-        { title: '权限管理', name: '' }, 
-        { title: '账号管理', name: 'SystemPermissionAccount' }
-      ],
+    path: '/system/account',
+    name: 'SystemAccount',
+    component: () => import('@/views/system/account/index.vue'),
+    meta: {
+      name: 'SystemAccount',
       keepAlive: true
     }
-  },
-  // ---- 添加 ----
-  {
-    path: '/system-permission-account/add',
-    name: 'SystemPermissionAccountAdd',
-    component: () => import('@/views/system/permission/account/add.vue'),
-    meta: {
-      class1: 'system',
-      class2: 'permission',
-      class3: 'account',
-      classList: ['system', 'permission', 'account'],
-      breadcrumb: [
-        { title: '系统管理', name: '' }, 
-        { title: '权限管理', name: '' }, 
-        { title: '账号管理', name: 'SystemPermissionAccount' },
-        { title: '添加', name: 'SystemPermissionAccountAdd' }
-      ],
-      keepAlive: false
-    }
-  },
-  // ---- 编辑 ----
-  {
-    path: '/system-permission-account/edit/:id',
-    name: 'SystemPermissionAccountEdit',
-    component: () => import('@/views/system/permission/account/edit.vue'),
-    meta: {
-      class1: 'system',
-      class2: 'permission',
-      class3: 'account',
-      classList: ['system', 'permission', 'account'],
-      breadcrumb: [
-        { title: '系统管理', name: '' }, 
-        { title: '权限管理', name: '' }, 
-        { title: '账号管理', name: 'SystemPermissionAccount' },
-        { title: '编辑', name: 'SystemPermissionAccountEdit' }
-      ],
-      keepAlive: false
-    }
-  },
+  }
 ]

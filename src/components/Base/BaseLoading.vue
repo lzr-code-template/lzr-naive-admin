@@ -1,5 +1,8 @@
 <template>
-  <div class="f-c-c" :style="{ minHeight: `${clientHeight - 143}px` }">
+  <div 
+    class="f-c-c"
+    :style="{ minHeight: `${clientHeight - 143}px` }"
+  >
     <div class="loading-wrap">
       <span class="dot dot-spin"><i></i><i></i><i></i><i></i></span>
     </div>
@@ -36,7 +39,7 @@ const clientHeight = useWindowSize().height
   height: 14px;
   position: absolute;
   display: block;
-  background-color: #409eff;
+  background-color: #0064C8;
   border-radius: 100%;
   transform: scale(.75);
   transform-origin: 50% 50%;

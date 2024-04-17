@@ -1,16 +1,7 @@
 import { RouteRecordRaw } from 'vue-router'
 
-interface BreadcrumbInter {
-  title: string
-  name: string
-}
-
 interface Meta {
-  class1: string
-  class2: string
-  class3: string
-  classList: string[]
-  breadcrumb?: BreadcrumbInter[]
+  name: string
   keepAlive: Boolean
 }
 
@@ -30,7 +21,6 @@ type RoutesType = Array<RouteType>
 type RouteModule = Record<string, { default: RouteType }>
 
 export { 
-  BreadcrumbInter,
   RouteModule, 
   RouteType, 
   RoutesType

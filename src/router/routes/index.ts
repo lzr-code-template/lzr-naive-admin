@@ -1,9 +1,9 @@
 import type { RouteModule, RouteType, RoutesType } from '@/types/router.ts'
 import Layout from '@/components/Layout/index.vue'
 import ErrorPage from '@/views/error-page/404.vue'
-import medical from './medical'
 import order from './order'
-import finance from './finance'
+import user from './user'
+import webset from './webset'
 import system from './system'
 
 export const basicRoutes: RoutesType = [
@@ -23,11 +23,7 @@ export const basicRoutes: RoutesType = [
     component: Layout,
     redirect: '/home',
     meta: {
-      class1: 'main',
-      class2: 'home',
-      class3: 'index',
-      classList: ['main', 'home', 'index'],
-      breadcrumb: [{ title: '', name: '' }],
+      name: 'main',
       keepAlive: false
     },
     children: [
@@ -35,16 +31,20 @@ export const basicRoutes: RoutesType = [
       {
         path: '/home',
         name: 'Home',
-        component: () => import('@/views/home/index.vue')
+        component: () => import('@/views/home/index.vue'),
+        meta: {
+          name: 'Home',
+          keepAlive: false
+        }
       },
-      /** --- 医务中心 --- **/
-      ...medical,
-      /** --- 订单中心 --- **/
+      /** --- 订单管理 --- **/
       ...order,
-      /** --- 财务中心 --- **/
-      ...finance,
+      /** --- 用户管理 --- **/
+      ...user,
+      /** --- 网站管理 --- **/
+      ...webset,
       /** --- 系统管理 --- **/
-      ...system,
+      ...system
     ]
   },
   {
