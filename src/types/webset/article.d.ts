@@ -1,19 +1,17 @@
 interface ParamsInter {
   size: number
   currentPage: number
-  name: string
-  zaixian: string | null
+  clazzid: number | null
 }
 
 interface FilterInter {
   height: number
   data: {
-    name: string
-    zaixian: string | null
+    clazzid: number | null
   }
-  zaixianOptions: {
+  clazzOptions: {
     label: string
-    value: string
+    value: number
   }[]
   reset: () => void
   search: () => void
@@ -24,8 +22,8 @@ interface TableInter {
   list: any[]
   getList: (more: boolean) => void
   pagination: any
-  columns: any[]
-  handleFiltersChange: (filters: DataTableFilterState) => void
+  // columns: any[]
+  // handleFiltersChange: (filters: DataTableFilterState) => void
 }
 
 export { 

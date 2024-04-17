@@ -18,5 +18,15 @@ export default [
       name: 'WebsetMail',
       keepAlive: true
     }
+  },
+  /** ----- 网站管理 -> 文章管理 ----- **/
+  {
+    path: '/webset/article',
+    name: 'WebsetArticle',
+    component: () => import('@/views/webset/article/index.vue'),
+    meta: {
+      name: 'WebsetArticle',
+      keepAlive: true
+    }
   }
 ]

@@ -70,7 +70,7 @@
 <script setup lang="ts">
 import api from '@/api/index'
 import crypto from '@/until/crypto'
-import type { LoginInter } from '@/types/login.ts'
+import type { LoginInter } from '@/types/account/login'
 
 const router = useRouter()
 const $cookies = inject<any>('$cookies')

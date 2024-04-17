@@ -85,7 +85,7 @@ import api from '@/api/index'
 import { ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { useElementSize, useWindowSize } from '@vueuse/core'
 import { pickBy } from 'lodash-es'
-import type { ParamsInter, FilterInter, TableInter } from '@/types/role'
+import type { ParamsInter, FilterInter, TableInter } from '@/types/system/role'
 import type { DataTableFilterState } from 'naive-ui'
 
 defineOptions({
@@ -123,13 +123,13 @@ const filter:FilterInter = reactive({
   height: useElementSize(filterRef).height,
   // 报告状态 options
   zaixianOptions: [
-    { label: '禁用', value: '0' },
-    { label: '启用', value: '1' }
+    { label: '禁用', value: 0 },
+    { label: '启用', value: 1 }
   ],
   // 筛选区数据
   data: {
     name: '',           // 名称
-    zaixian: null  // 状态
+    zaixian: null       // 状态
   },
   // 重置
   reset: () => {
@@ -157,7 +157,9 @@ const table: TableInter = reactive({
   list: [],
   getList: (more = true) => {
     if (!more) params.currentPage = table.pagination.page = 1
-    api.get('/system/role/getAdminRolePage', pickBy(params)).then((res) => {
+    api.get('/system/role/getAdminRolePage', pickBy(params, (value: ParamsInter) => {
+      return typeof(value) === 'number' && value === 0 || !!value
+    })).then((res) => {
       if (res.code === 200) {
         table.pagination.itemCount = res.data.total
         table.list = res.data.records || []
@@ -308,7 +310,7 @@ const table: TableInter = reactive({
     table.loading = true
     table.columns.forEach(item => {
       if (item.key === 'zaixian') {
-        item.filterOptionValue = params.zaixian = filter.data.zaixian = filters.zaixian as string | null
+        item.filterOptionValue = params.zaixian = filter.data.zaixian = filters.zaixian as number | null
       }
     })
     nextTick(() => table.getList(false))

@@ -24,7 +24,7 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "qs": "^6.12.1",
-    "vue": "^3.4.22",
+    "vue": "^3.4.23",
     "vue-clipboard3": "^2.0.0",
     "vue-cookies": "^1.8.4",
     "vue-dompurify-html": "^5.0.1",
@@ -35,7 +35,7 @@
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^18.19.31",
     "@types/nprogress": "^0.2.3",
-    "@types/qs": "^6.9.14",
+    "@types/qs": "^6.9.15",
     "@vitejs/plugin-vue": "^4.6.2",
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.19",
@@ -47,7 +47,7 @@
     "unplugin-auto-import": "^0.17.5",
     "unplugin-vue-components": "^0.26.0",
     "unplugin-vue-define-options": "^1.4.3",
-    "vite": "^5.2.8",
+    "vite": "^5.2.9",
     "vite-plugin-compression": "^0.5.1",
     "vue-tsc": "^1.8.27"
   }

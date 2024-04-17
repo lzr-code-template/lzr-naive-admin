@@ -159,11 +159,11 @@
 <script setup lang="ts">
 import api from '@/api/index'
 import { validatorMobile } from '@/until/validator'
-import { ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { useElementSize, useWindowSize } from '@vueuse/core'
 import { debounce, pick, pickBy } from 'lodash-es'
 import type { FormInst, FormItemRule } from 'naive-ui'
-import type { ParamsInter, FilterInter, TableInter, ModalInter } from '@/types/account.ts'
+import type { ParamsInter, FilterInter, TableInter, ModalInter } from '@/types/system/account'
 
 onMounted(() => {
   table.getList(false)        // 获取表单
@@ -181,7 +181,6 @@ router.beforeEach((to, from, next) => {
   next()
 })
 const message = useMessage()
-const dialog = useDialog()
 const clientHeight = useWindowSize().height
 const params:ParamsInter = reactive({
   size: 20,
@@ -200,8 +199,8 @@ const filter:FilterInter = reactive({
   roleOptions: [],
   // 报告状态 options
   zaixianOptions: [
-    { label: '禁用', value: '0' },
-    { label: '启用', value: '1' },
+    { label: '禁用', value: 0 },
+    { label: '启用', value: 1 },
   ],
   // 筛选区数据
   data: {
@@ -235,9 +234,11 @@ const filter:FilterInter = reactive({
 const table: TableInter = reactive({
   loading: true,
   list: [],
-  getList: debounce((more = true) => {
+  getList: (more = true) => {
     if (!more) params.currentPage = table.pagination.page = 1
-    api.get('/system/account/getAdminUserPage', pickBy(params)).then((res) => {
+    api.get('/system/account/getAdminUserPage', pickBy(params, (value: ParamsInter) => {
+      return typeof(value) === 'number' && value === 0 || Boolean(value)
+    })).then((res) => {
       if (res.code === 200) {
         table.pagination.itemCount = res.data.total
         table.list = res.data.records || []
@@ -247,7 +248,7 @@ const table: TableInter = reactive({
       }
       nextTick(() => table.loading = false)
     })
-  }, 200, { leading: true, trailing: true }),
+  },
   pagination: {
     page: params.currentPage,
     pageSize: params.size,
@@ -383,7 +384,7 @@ const modal: ModalInter = reactive({
     name: '',       // 姓名
     gender: '0',    // 性别
     roleid: null,   // 角色
-    zaixian: '1',   // 状态
+    zaixian: 1,     // 状态
     mobile: '',     // 手机号
   },
   rules: {
@@ -397,7 +398,8 @@ const modal: ModalInter = reactive({
   init: () => {
     modal.data.id = modal.data.roleid = null
     modal.data.name = modal.data.mobile = ''
-    modal.data.gender = modal.data.zaixian = '1'
+    modal.data.gender = '1'
+    modal.data.zaixian = 1
   },
   open: (title, id=null) => {
     modal.init()
@@ -408,7 +410,7 @@ const modal: ModalInter = reactive({
     }
     if (title === '编辑账号') {
       modal.show = modal.loading = true
-      api.get('/system/account/updateAdminUserDetail', {id: id}).then((res) => {
+      api.get('/system/account/updateAdminUserDetail', {id}).then((res) => {
         if (res.code === 200) {
           Object.assign(modal.data, pick(res.data, ['id', 'name', 'gender', 'roleid', 'zaixian', 'mobile']))
           nextTick(() => modal.loading = false)
@@ -453,7 +455,7 @@ const modal: ModalInter = reactive({
         }
       } else {
         errors.forEach(item => {
-          message.warning(item[0].message)
+          message.warning(item[0].message as string)
         })
       }
     })

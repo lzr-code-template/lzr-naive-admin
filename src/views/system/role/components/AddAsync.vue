@@ -23,7 +23,6 @@
             <n-select 
               v-model:value="form.zaixian" 
               :options="zaixianOptions" 
-              filterable clearable
             />
           </n-form-item-gi>
           <n-form-item-gi :span="24" label="选择权限：" path="perm">
@@ -86,13 +85,12 @@ const btnLoading = ref<boolean>(false)
 const formRef = ref<FormInst | null>()
 const form = reactive({
   name: '',         // 名称
-  zaixian: null,    // 状态
+  zaixian: 1,       // 状态
   perm: '',         // 权限
 })
 const rules = {
-  name: [{required: true, message: "请输入名称", trigger: ["blur", "input"]}],
-  zaixian: [{required: true, type: 'number', message: "请选择角色状态", trigger: ["blur", "change"]}],
-  perm: [{required: true, message: "请选择权限", trigger: ["blur", "change"]}],
+  name: [{ required: true, message: "请输入名称", trigger: ["blur", "input"] }],
+  perm: [{ required: true, message: "请选择权限", trigger: ["blur", "change"] }]
 }
 
 const zaixianOptions = [
@@ -125,12 +123,11 @@ const handleValidateClick = () => {
       })
     } else {
       errors.forEach(item => {
-        // message.warning(item[0].message)
+        message.warning(item[0].message as string)
       })
     }
   })
 }
-
 // 权限列表获取
 const perm = reactive({
   default: [],

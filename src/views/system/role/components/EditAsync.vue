@@ -23,7 +23,6 @@
             <n-select 
               v-model:value="form.zaixian" 
               :options="zaixianOptions" 
-              filterable clearable
             />
           </n-form-item-gi>
           <n-form-item-gi :span="24" label="选择权限：" path="perm">
@@ -76,8 +75,8 @@
 <script setup lang="ts">
 import api from '@/api/index'
 import { pick } from 'lodash-es'
-import { useKeepaliveStore } from '@/store/keepalive'
 import { isNonEmptyArray } from '@/until/array'
+import type { FormInst } from 'naive-ui'
 
 const route = useRoute()
 const router = useRouter()
@@ -88,13 +87,12 @@ const formRef = ref<FormInst | null>()
 const form = reactive({
   id: route.params.id,
   name: '',         // 名称
-  zaixian: null,    // 状态
+  zaixian: 0,       // 状态
   perm: '',         // 权限
 })
 const rules = {
   name: [{required: true, message: "请输入名称", trigger: ["blur", "input"]}],
-  zaixian: [{required: true, type: 'number', message: "请选择角色状态", type: 'number', trigger: ["blur", "change"]}],
-  perm: [{required: true, message: "请选择权限", trigger: ["blur", "change"]}],
+  perm: [{required: true, message: "请选择权限", trigger: ["blur", "change"]}]
 }
 
 const zaixianOptions = [
@@ -102,7 +100,7 @@ const zaixianOptions = [
   { label: '启用', value: 1 }
 ]
 
-const changeperm = (keys) => {
+const changeperm = (keys: Array<string | number>) => {
   form.perm = isNonEmptyArray(keys) ? JSON.stringify(keys) : ''
 }
 
@@ -126,7 +124,7 @@ const handleValidateClick = () => {
       })
     } else {
       errors.forEach(item => {
-        message.warning(item[0].message)
+        message.warning(item[0].message as string)
       })
     }
   })

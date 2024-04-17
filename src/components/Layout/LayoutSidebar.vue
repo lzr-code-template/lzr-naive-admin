@@ -19,7 +19,7 @@
       <h1 class="text-lg font-bold">{{ title }}</h1>
     </div>
     <n-menu
-      v-model:value="$route.meta.name"
+      v-model:value="active"
       :collapsed="collapsed"
       :collapsed-width="64"
       :collapsed-icon-size="22"
@@ -31,16 +31,18 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router"
 import { HomeIcon, DocumentTextIcon, UserIcon, WindowIcon, Cog6ToothIcon } from '@heroicons/vue/24/outline'
+import type { MenuOption } from 'naive-ui'
 import { useLayoutStore } from '@/store/layout'
 import logoImg from '@/assets/images/logo.webp'
 
+const route = useRoute()
 const { title, collapsed, collapsedUpdate } = toRefs(useLayoutStore())
 const menuOptions: MenuOption[] = [
   {
     label: () => h(RouterLink, {to: '/'}, { default: () => '工作台'}), 
     key: 'Home',
     icon: () => h(HomeIcon, { class: '-mt-0.5 w-5 h-5' }),
-    children: null
+    children: undefined
   },
   {
     label: '订单管理',
@@ -57,6 +59,7 @@ const menuOptions: MenuOption[] = [
     children: [
       { label: () => h(RouterLink, {to: '/webset/swiper'}, { default: () => '轮播图'}),  key: 'WebsetSwiper' },
       { label: () => h(RouterLink, {to: '/webset/mail'}, { default: () => '邮件模板'}),  key: 'WebsetMail' },
+      { label: () => h(RouterLink, {to: '/webset/article'}, { default: () => '文章管理'}),  key: 'WebsetArticle' },
     ]
   },
   {
@@ -78,4 +81,9 @@ const menuOptions: MenuOption[] = [
     ]
   }
 ]
+
+const active = ref<string>(route.meta.name ? route.meta.name as string : 'Home')
+watch(() => route.meta.name, newValue => {
+  active.value = newValue ? newValue as string : 'Home'
+})
 </script>

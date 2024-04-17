@@ -3,7 +3,7 @@ interface ParamsInter {
   currentPage: number
   name: string
   roleid: number | null
-  zaixian: string | null
+  zaixian: number | null
 }
 
 interface FilterInter {
@@ -11,7 +11,7 @@ interface FilterInter {
   data: {
     name: string
     roleid: number | null
-    zaixian: string | null
+    zaixian: number | null
   }
   roleOptions: {
     id: number
@@ -19,7 +19,7 @@ interface FilterInter {
   }[]
   zaixianOptions: {
     label: string
-    value: string
+    value: number
   }[]
   reset: () => void
   search: () => void
@@ -48,7 +48,7 @@ interface ModalInter {
     name: string
     gender: string
     roleid: number | null
-    zaixian: string | null
+    zaixian: number | null
     mobile: string
   }
   rules: any
