@@ -17,7 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import { NConfigProvider, zhCN, dateZhCN, GlobalThemeOverrides } from 'naive-ui'
+import { NConfigProvider, zhCN, dateZhCN } from 'naive-ui'
+import type { GlobalThemeOverrides } from 'naive-ui'
 const themeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: '#0064C8',

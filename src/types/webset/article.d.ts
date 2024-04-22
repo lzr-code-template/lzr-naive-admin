@@ -22,8 +22,8 @@ interface TableInter {
   list: any[]
   getList: (more: boolean) => void
   pagination: any
-  // columns: any[]
-  // handleFiltersChange: (filters: DataTableFilterState) => void
+  columns: any[]
+  handleFiltersChange: (filters: DataTableFilterState) => void
 }
 
 export { 

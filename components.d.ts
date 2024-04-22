@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppMain: typeof import('./src/components/Layout/AppMain.vue')['default']
     AppProvider: typeof import('./src/components/Common/AppProvider.vue')['default']
+    BaseEditor: typeof import('./src/components/Base/BaseEditor.vue')['default']
     BaseLoading: typeof import('./src/components/Base/BaseLoading.vue')['default']
     BasePagination: typeof import('./src/components/Base/BasePagination.vue')['default']
     CrumbBar: typeof import('./src/components/Layout/CrumbBar.vue')['default']
@@ -55,6 +56,7 @@ declare module 'vue' {
     NFormItemGi: typeof import('naive-ui')['NFormItemGi']
     NGrid: typeof import('naive-ui')['NGrid']
     NInput: typeof import('naive-ui')['NInput']
+    NInputNumber: typeof import('naive-ui')['NInputNumber']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutFooter: typeof import('naive-ui')['NLayoutFooter']

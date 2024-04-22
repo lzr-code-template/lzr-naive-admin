@@ -28,5 +28,24 @@ export default [
       name: 'WebsetArticle',
       keepAlive: true
     }
+  },
+  // 网站管理 - 文章管理 - 添加
+  {
+    path: '/webset/article/add',
+    name: 'WebsetArticleAdd',
+    component: () => import('@/views/webset/article/add.vue'),
+    meta: {
+      name: 'WebsetArticle',
+      keepAlive: true
+    }
+  },
+  {
+    path: '/webset/article/edit/:id',
+    name: 'WebsetArticleEdit',
+    component: () => import('@/views/webset/article/edit.vue'),
+    meta: {
+      name: 'WebsetArticle',
+      keepAlive: true
+    }
   }
 ]

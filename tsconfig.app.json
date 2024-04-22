@@ -10,6 +10,7 @@
     "src/store/*.ts",
     "src/api/*.ts",
     "src/until/*.ts",
+    "src/custom-types.d.ts"
   ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {

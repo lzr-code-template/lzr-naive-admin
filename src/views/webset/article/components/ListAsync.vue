@@ -5,25 +5,81 @@
       ref="filterRef"
       class="flex flex-wrap"
     >
-  
+      <!-- 类别 -->
+      <div class="mr-10 mb-4 w-72 f-c space-x-2">
+        <p class="shrink-0 text-sm">类别：</p>
+        <n-select
+          v-model:value="filter.data.clazzid"
+          :options="filter.clazzOptions"
+          filterable clearable
+        />
+      </div>
+      <!-- btn --> 
+      <div class="mr-10 mb-4 f-c space-x-4">
+        <div class="w-20">
+          <n-throttle-button
+            text="重置"
+            block
+            @click="filter.reset"
+          />
+        </div>
+        <div class="w-20">
+          <n-throttle-button 
+            type="primary"
+            text="查询"
+            block
+            @click="filter.search"
+          />
+        </div>
+      </div>
+      <div 
+        class="ml-auto w-20"
+        @click="$router.push('/webset/article/add')"
+      >
+        <n-button block type="primary">新增</n-button>
+      </div>
+    </section>
+     <!-- section: 表单区 -->
+     <section>
+      <n-data-table
+        remote
+        :loading="table.loading"
+        :columns="table.columns"
+        :data="table.list"
+        :pagination="table.pagination"
+        :min-height="`${clientHeight - filter.height - 280}`"
+        :max-height="`${clientHeight - filter.height - 280}`"
+        :scroll-x="1280"
+        @update:filters="table.handleFiltersChange"
+      />
     </section>
   </main>
 </template>
 
 <script setup lang="ts">
 import api from '@/api/index'
-import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { useElementSize, useWindowSize } from '@vueuse/core'
-import { debounce, pick, pickBy } from 'lodash-es'
-import type { FormInst, FormItemRule } from 'naive-ui'
+import { pickBy } from 'lodash-es'
+import type { DataTableFilterState } from 'naive-ui'
 import type { ParamsInter, FilterInter, TableInter } from '@/types/webset/article'
 
 const router = useRouter()
 const clientHeight = useWindowSize().height
+const message = useMessage()
+const dialog = useDialog()
+
 const params:ParamsInter = reactive({
   size: 20,
   currentPage: 1,
   clazzid: 0
+})
+
+router.beforeEach((to, from, next) => {
+  if (from.name === 'WebsetArticleEdit') {
+    table.loading = true
+    table.getList(true)
+  }
+  next()
 })
 
 onMounted(() => {
@@ -46,7 +102,7 @@ const filter:FilterInter = reactive({
     table.loading = true
     filter.data.clazzid = params.clazzid = null
     table.columns.forEach(item => {
-      if (item.key === 'clazzid') item.filterOptionValue = params.clazzid = filter.data.clazzid = null
+      if (item.key === 'clazzname') item.filterOptionValue = params.clazzid = filter.data.clazzid = null
     })
     nextTick(() => table.getList(false))
   },
@@ -55,7 +111,7 @@ const filter:FilterInter = reactive({
     table.loading = true
     params.clazzid = filter.data.clazzid
     table.columns.forEach(item => {
-      if (item.key === 'clazzid') item.filterOptionValue = params.clazzid = filter.data.clazzid
+      if (item.key === 'clazzname') item.filterOptionValue = params.clazzid = filter.data.clazzid
     })
     nextTick(() => table.getList(false))
   }
@@ -118,6 +174,7 @@ const table: TableInter = reactive({
     { 
       title: "ID", 
       key: "id", 
+      width: '100', 
       align: 'center'
     },
     { 
@@ -126,39 +183,29 @@ const table: TableInter = reactive({
       align: 'center'
     },
     { 
+      title: "排序", 
+      key: "ordervalue", 
+      width: '100', 
+      align: 'center'
+    },
+    { 
+      title: "创建时间", 
+      key: "inserttime", 
+      align: 'center'
+    },
+    { 
+      title: "更新时间", 
+      key: "inserttime", 
+      align: 'center'
+    },
+    { 
       title: "分类", 
       key: "clazzname", 
-      align: 'center'
-    },
-    { 
-      title: "角色", 
-      key: "rolename", 
-      align: 'center'
-    },
-    { 
-      title: "状态", 
-      key: "zaixian",
       align: 'center',
-      render(row: {
-        id: number
-        name: string
-        zaixian: string
-      }) {
-        return h(
-          NTag, {
-            class: '-ml-5',
-            size: 'small',
-            bordered: false,
-            type: +row.zaixian === 0 ? 'error' : 'success'
-          },{
-            default: () => +row.zaixian === 0 ? '禁用' : '启用'
-          }
-        )
-      },
       filter: true,
       filterMultiple: false,
       filterOptionValue: null,
-      filterOptions: filter.zaixianOptions
+      filterOptions: filter.clazzOptions
     },
     { 
       title: "操作", 
@@ -167,23 +214,65 @@ const table: TableInter = reactive({
       fixed: 'right',
       render(row: {
         id: number
+        name: string
       }) {
         return h(
           'div', { class: 'f-c-c space-x-2.5' }, [
             h(NButton, {
               type: 'primary', 
               text: true, 
-              onClick: () => modal.open('编辑账号', row.id)
+              onClick: () => { router.push(`/webset/article/edit/${row.id}`) }
             }, { 
               default: () => '编辑' 
+            }),
+            h(NButton, {
+              type: 'error', 
+              text: true, 
+              onClick: () => {
+                dialog.info({
+                  title: '提示',
+                  content: `确定要删除该文章吗？`,
+                  positiveText: '确定',
+                  negativeText: '取消',
+                  onPositiveClick: () => {
+                    table.loading = true
+                    api.get('/article/deleteArticle', {id: row.id}).then((res) => {
+                      if (res.code === 200) {
+                        message.success('操作成功')
+                        table.getList(true)
+                      } else {
+                        message.warning(res.msg)
+                        table.loading = false
+                      }
+                    })
+                  },
+                  onNegativeClick: () => {}
+                })
+              }
+            }, { 
+              default: () => '删除'
             })
           ]
         )
       }
     },
   ],
+  handleFiltersChange: (filters: DataTableFilterState) => {
+    table.loading = true
+    table.columns.forEach(item => {
+      if (item.key === 'clazzname') {
+        item.filterOptionValue = params.clazzid = filter.data.clazzid = filters.clazzname as number | null
+      }
+    })
+    nextTick(() => table.getList(false))
+  }
 })
 
-const roleRes = await api.get('/article/getArticleClazz')
-if (roleRes.code === 200) filter.clazzOptions = roleRes.data
+const clazzRes = await api.get('/article/getArticleClazz')
+if (clazzRes.code === 200) {
+  filter.clazzOptions = clazzRes.data
+  table.columns.forEach(item => {
+    if (item.key === 'clazzname') item.filterOptions = clazzRes.data
+  })
+}
 </script>

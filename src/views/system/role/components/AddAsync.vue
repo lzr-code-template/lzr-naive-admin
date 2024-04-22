@@ -13,9 +13,9 @@
       >
         <n-grid :cols="24" :x-gap="24">
           <n-form-item-gi :span="12" label="角色名称：" path="name">
-            <n-input 
-              v-model:value="form.name" 
-              placeholder="请输入角色名称" 
+            <n-input
+              v-model:value="form.name"
+              placeholder="请输入角色名称"
               clearable 
             />
           </n-form-item-gi>
@@ -76,7 +76,9 @@
 import api from '@/api/index'
 import { useKeepaliveStore } from '@/store/keepalive'
 import { isNonEmptyArray } from '@/until/array'
-import type { FormInst } from 'naive-ui'
+import type { FormInst, FormItemRule } from 'naive-ui'
+
+type FormRules = { [itemValidatePath: string]: FormItemRule | Array<FormItemRule> | FormRules }
 
 const router = useRouter()
 const message = useMessage()
@@ -88,7 +90,7 @@ const form = reactive({
   zaixian: 1,       // 状态
   perm: '',         // 权限
 })
-const rules = {
+const rules:FormRules = {
   name: [{ required: true, message: "请输入名称", trigger: ["blur", "input"] }],
   perm: [{ required: true, message: "请选择权限", trigger: ["blur", "change"] }]
 }
