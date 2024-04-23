@@ -17,17 +17,7 @@ interface FilterInter {
   search: () => void
 }
 
-interface TableInter {
-  loading: boolean
-  list: any[]
-  getList: (more: boolean) => void
-  pagination: any
-  columns: any[]
-  handleFiltersChange: (filters: DataTableFilterState) => void
-}
-
 export { 
   ParamsInter,
-  FilterInter,
-  TableInter
+  FilterInter
 }

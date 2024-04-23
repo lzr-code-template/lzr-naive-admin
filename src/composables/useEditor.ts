@@ -1,8 +1,7 @@
 import type { IEditorConfig, IToolbarConfig } from '@wangeditor/editor'
 
-type InsertFnType = (url: string, alt: string, href: string) => void
-
 export function useEditor(action = `${import.meta.env.VITE_APP_URL}/open/addpic`) {
+  type InsertFnType = (url: string, alt: string, href: string) => void
   const toolbarConfig: Partial<IToolbarConfig> = {
     toolbarKeys: [
       'bold', 'italic','underline', 'color', 'bgColor',  '|',

@@ -59,9 +59,9 @@
 <script setup lang="ts">
 import api from '@/api/index'
 import { useElementSize, useWindowSize } from '@vueuse/core'
-import { pickBy } from 'lodash-es'
+import { useTable } from '@/composables/useTable'
+import type { ParamsInter, FilterInter } from '@/types/webset/article'
 import type { DataTableFilterState } from 'naive-ui'
-import type { ParamsInter, FilterInter, TableInter } from '@/types/webset/article'
 
 const router = useRouter()
 const clientHeight = useWindowSize().height
@@ -74,16 +74,16 @@ const params:ParamsInter = reactive({
   clazzid: 0
 })
 
+onMounted(() => {
+  table.getList(false)        // 获取表单
+})
+
 router.beforeEach((to, from, next) => {
   if (from.name === 'WebsetArticleEdit') {
     table.loading = true
     table.getList(true)
   }
   next()
-})
-
-onMounted(() => {
-  table.getList(false)        // 获取表单
 })
 
 /** section1 筛选区 **/
@@ -118,145 +118,100 @@ const filter:FilterInter = reactive({
 })
 
 /** section2 表单区 **/
-const table: TableInter = reactive({
-  loading: true,
-  list: [],
-  getList: (more = true) => {
-    if (!more) params.currentPage = table.pagination.page = 1
-    api.get('/article/getArticlePage', pickBy(params, (value: ParamsInter) => {
-      return typeof(value) === 'number' && value === 0 || Boolean(value)
-    })).then((res) => {
-      if (res.code === 200) {
-        table.pagination.itemCount = res.data.total
-        table.list = res.data.records || []
-      } else {
-        table.pagination.itemCount = 0
-        table.list = []
-      }
-      nextTick(() => table.loading = false)
-    })
+const columns = [
+  { 
+    title: "序号", 
+    width: '70', 
+    align: 'center',
+    render(_: object, index: number) { return `${(table.pagination.page - 1) * table.pagination.pageSize + index + 1 }` }
   },
-  pagination: {
-    page: params.currentPage,
-    pageSize: params.size,
-    pageSizes: [
-      { label: '5条', value: 5 },
-      { label: '10条', value: 10 },
-      { label: '15条', value: 15 },
-      { label: '20条', value: 20 },
-      { label: '50条', value: 50 }
-    ],
-    itemCount: 0,
-    showSizePicker: true,
-    showQuickJumper: true,
-    displayOrder: ['size-picker', 'pages', 'quick-jumper'],
-    prefix ({ itemCount }: { itemCount: number}) {
-      return `共 ${itemCount} 条，每页`
-    },
-    onUpdatePage: (page: number) => {
-      table.loading = true
-      params.currentPage = table.pagination.page = page
-      nextTick(() => table.getList(true))
-    },
-    onUpdatePageSize: (pageSize: number) => {
-      table.loading = true
-      params.size = table.pagination.pageSize = pageSize
-      nextTick(() => table.getList(false))
-    } 
+  {
+    title: "ID", 
+    key: "id", 
+    width: '100', 
+    align: 'center'
   },
-  columns: [
-    { 
-      title: "序号", 
-      width: '70', 
-      align: 'center',
-      render(_: object, index: number) { return `${(table.pagination.page - 1) * table.pagination.pageSize + index + 1 }` }
-    },
-    { 
-      title: "ID", 
-      key: "id", 
-      width: '100', 
-      align: 'center'
-    },
-    { 
-      title: "标题", 
-      key: "title", 
-      align: 'center'
-    },
-    { 
-      title: "排序", 
-      key: "ordervalue", 
-      width: '100', 
-      align: 'center'
-    },
-    { 
-      title: "创建时间", 
-      key: "inserttime", 
-      align: 'center'
-    },
-    { 
-      title: "更新时间", 
-      key: "inserttime", 
-      align: 'center'
-    },
-    { 
-      title: "分类", 
-      key: "clazzname", 
-      align: 'center',
-      filter: true,
-      filterMultiple: false,
-      filterOptionValue: null,
-      filterOptions: filter.clazzOptions
-    },
-    { 
-      title: "操作", 
-      key: "", 
-      align: 'center',
-      fixed: 'right',
-      render(row: {
-        id: number
-        name: string
-      }) {
-        return h(
-          'div', { class: 'f-c-c space-x-2.5' }, [
-            h(NButton, {
-              type: 'primary', 
-              text: true, 
-              onClick: () => { router.push(`/webset/article/edit/${row.id}`) }
-            }, { 
-              default: () => '编辑' 
-            }),
-            h(NButton, {
-              type: 'error', 
-              text: true, 
-              onClick: () => {
-                dialog.info({
-                  title: '提示',
-                  content: `确定要删除该文章吗？`,
-                  positiveText: '确定',
-                  negativeText: '取消',
-                  onPositiveClick: () => {
-                    table.loading = true
-                    api.get('/article/deleteArticle', {id: row.id}).then((res) => {
-                      if (res.code === 200) {
-                        message.success('操作成功')
-                        table.getList(true)
-                      } else {
-                        message.warning(res.msg)
-                        table.loading = false
-                      }
-                    })
-                  },
-                  onNegativeClick: () => {}
-                })
-              }
-            }, { 
-              default: () => '删除'
-            })
-          ]
-        )
-      }
-    },
-  ],
+  {
+    title: "标题", 
+    key: "title", 
+    align: 'center'
+  },
+  {
+    title: "排序", 
+    key: "ordervalue", 
+    width: '100', 
+    align: 'center'
+  },
+  {
+    title: "创建时间", 
+    key: "inserttime", 
+    align: 'center'
+  },
+  {
+    title: "更新时间", 
+    key: "inserttime", 
+    align: 'center'
+  },
+  {
+    title: "分类", 
+    key: "clazzname", 
+    align: 'center',
+    filter: true,
+    filterMultiple: false,
+    filterOptionValue: null,
+    filterOptions: filter.clazzOptions
+  },
+  {
+    title: "操作", 
+    key: "", 
+    align: 'center',
+    fixed: 'right',
+    render(row: {
+      id: number
+      name: string
+    }) {
+      return h(
+        'div', { class: 'f-c-c space-x-2.5' }, [
+          h(NButton, {
+            type: 'primary', 
+            text: true, 
+            onClick: () => { router.push(`/webset/article/edit/${row.id}`) }
+          }, { 
+            default: () => '编辑' 
+          }),
+          h(NButton, {
+            type: 'error',
+            text: true,
+            onClick: () => {
+              dialog.info({
+                title: '提示',
+                content: `确定要删除该文章吗？`,
+                positiveText: '确定',
+                negativeText: '取消',
+                onPositiveClick: () => {
+                  table.loading = true
+                  api.get('/article/deleteArticle', {id: row.id}).then((res) => {
+                    if (res.code === 200) {
+                      message.success('操作成功')
+                      table.getList(true)
+                    } else {
+                      message.warning(res.msg)
+                      table.loading = false
+                    }
+                  })
+                },
+                onNegativeClick: () => {}
+              })
+            }
+          }, {
+            default: () => '删除'
+          })
+        ]
+      )
+    }
+  },
+]
+const { table } = useTable('/article/getArticlePage', params, columns, {
   handleFiltersChange: (filters: DataTableFilterState) => {
     table.loading = true
     table.columns.forEach(item => {
@@ -268,6 +223,7 @@ const table: TableInter = reactive({
   }
 })
 
+// 获取分类
 const clazzRes = await api.get('/article/getArticleClazz')
 if (clazzRes.code === 200) {
   filter.clazzOptions = clazzRes.data

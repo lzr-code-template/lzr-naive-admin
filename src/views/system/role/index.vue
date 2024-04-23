@@ -84,8 +84,8 @@
 import api from '@/api/index'
 import { ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { useElementSize, useWindowSize } from '@vueuse/core'
-import { pickBy } from 'lodash-es'
-import type { ParamsInter, FilterInter, TableInter } from '@/types/system/role'
+import { useTable } from '@/composables/useTable'
+import type { ParamsInter, FilterInter } from '@/types/system/role'
 import type { DataTableFilterState } from 'naive-ui'
 
 defineOptions({
@@ -94,9 +94,6 @@ defineOptions({
 onMounted(() => {
   table.getList(false)        // 获取表单
 })
-// onUnmounted(() => {
-//   table.getList.cancel()
-// })
 
 const router = useRouter()
 router.beforeEach((to, from, next) => {
@@ -152,160 +149,115 @@ const filter:FilterInter = reactive({
 })
 
 /** section2 表单区 **/
-const table: TableInter = reactive({
-  loading: true,
-  list: [],
-  getList: (more = true) => {
-    if (!more) params.currentPage = table.pagination.page = 1
-    api.get('/system/role/getAdminRolePage', pickBy(params, (value: ParamsInter) => {
-      return typeof(value) === 'number' && value === 0 || !!value
-    })).then((res) => {
-      if (res.code === 200) {
-        table.pagination.itemCount = res.data.total
-        table.list = res.data.records || []
-      } else {
-        table.pagination.itemCount = 0
-        table.list = []
-      }
-      nextTick(() => table.loading = false)
-    })
+const columns = [
+  {
+    title: "序号", 
+    width: '70', 
+    align: 'center',
+    render(_: object, index: number) { return `${(table.pagination.page - 1) * table.pagination.pageSize + index + 1 }` }
   },
-  pagination: {
-    page: params.currentPage,
-    pageSize: params.size,
-    pageSizes: [
-      { label: '5条', value: 5 },
-      { label: '10条', value: 10 },
-      { label: '15条', value: 15 },
-      { label: '20条', value: 20 },
-      { label: '50条', value: 50 }
-    ],
-    itemCount: 0,
-    showSizePicker: true,
-    showQuickJumper: true,
-    displayOrder: ['size-picker', 'pages', 'quick-jumper'],
-    prefix ({ itemCount }: { itemCount: number}) {
-      return `共 ${itemCount} 条，每页`
-    },
-    onUpdatePage: (page: number) => {
-      table.loading = true
-      params.currentPage = table.pagination.page = page
-      nextTick(() => table.getList(true))
-    },
-    onUpdatePageSize: (pageSize: number) => {
-      table.loading = true
-      params.size = table.pagination.pageSize = pageSize
-      nextTick(() => table.getList(false))
-    },
+  { 
+    title: "ID", 
+    key: "id", 
+    align: 'center'
   },
-  columns: [
-    {
-      title: "序号", 
-      width: '70', 
-      align: 'center',
-      render(_: object, index: number) { return `${(table.pagination.page - 1) * table.pagination.pageSize + index + 1 }` }
+  { 
+    title: "角色名称", 
+    key: "name", 
+    align: 'center'
+  },
+  { 
+    title: "账号数量", 
+    key: "num", 
+    align: 'center'
+  },
+  { 
+    title: "创建人", 
+    key: "createbyperson", 
+    align: 'center'
+  },
+  { 
+    title: "创建时间", 
+    key: "inserttime", 
+    align: 'center'
+  },
+  { 
+    title: "状态", 
+    key: "zaixian",
+    align: 'center',
+    render(row: {
+      id: number
+      name: string
+      zaixian: string
+    }) {
+      return h(
+        NTag, {
+          class: '-ml-5',
+          size: 'small',
+          bordered: false,
+          type: +row.zaixian === 0 ? 'error' : 'success'
+        },{
+          default: () => ['禁用', '启用'][+row.zaixian]
+        }
+      )
     },
-    { 
-      title: "ID", 
-      key: "id", 
-      align: 'center'
-    },
-    { 
-      title: "角色名称", 
-      key: "name", 
-      align: 'center'
-    },
-    { 
-      title: "账号数量", 
-      key: "num", 
-      align: 'center'
-    },
-    { 
-      title: "创建人", 
-      key: "createbyperson", 
-      align: 'center'
-    },
-    { 
-      title: "创建时间", 
-      key: "inserttime", 
-      align: 'center'
-    },
-    { 
-      title: "状态", 
-      key: "zaixian",
-      align: 'center',
-      render(row: {
-        id: number
-        name: string
-        zaixian: string
-      }) {
-        return h(
-          NTag, {
-            class: '-ml-5',
-            size: 'small',
-            bordered: false,
-            type: +row.zaixian === 0 ? 'error' : 'success'
-          },{
-            default: () => ['禁用', '启用'][+row.zaixian]
-          }
-        )
-      },
-      filter: true,
-      filterMultiple: false,
-      filterOptionValue: null,
-      filterOptions: filter.zaixianOptions
-    },
-    { 
-      title: "操作", 
-      key: "", 
-      align: 'center',
-      fixed: 'right',
-      render(row: {
-        id: number
-        name: string
-        zaixian: string
-      }) {
-        return h(
-          'div', { class: 'f-c-c space-x-2.5' }, [
-            h(NButton, {
-              type: 'primary', 
-              text: true, 
-              onClick: () => { router.push(`/system/role/edit/${row.id}`) }
-            }, { 
-              default: () => '编辑' 
-            }),
-            h(NButton, {
-              type: 'error', 
-              text: true, 
-              onClick: () => {
-                dialog.info({
-                  title: '提示',
-                  content: `确定要删除该角色吗？`,
-                  positiveText: '确定',
-                  negativeText: '取消',
-                  onPositiveClick: () => {
-                    table.loading = true
-                    api.get('/system/role/deleteAdminRole', {id: row.id}).then((res) => {
-                      if (res.code === 200) {
-                        message.success('操作成功')
-                        table.getList(true)
-                      } else {
-                        message.warning(res.msg)
-                        table.loading = false
-                      }
-                    })
-                  },
-                  onNegativeClick: () => {}
-                })
-              }
-            }, { 
-              default: () => '删除'
-            })
-          ]
-        )
-      }
-    },
-  ],
+    filter: true,
+    filterMultiple: false,
+    filterOptionValue: null,
+    filterOptions: filter.zaixianOptions
+  },
+  { 
+    title: "操作", 
+    key: "", 
+    align: 'center',
+    fixed: 'right',
+    render(row: {
+      id: number
+      name: string
+      zaixian: string
+    }) {
+      return h(
+        'div', { class: 'f-c-c space-x-2.5' }, [
+          h(NButton, {
+            type: 'primary', 
+            text: true, 
+            onClick: () => { router.push(`/system/role/edit/${row.id}`) }
+          }, { 
+            default: () => '编辑' 
+          }),
+          h(NButton, {
+            type: 'error', 
+            text: true, 
+            onClick: () => {
+              dialog.info({
+                title: '提示',
+                content: `确定要删除该角色吗？`,
+                positiveText: '确定',
+                negativeText: '取消',
+                onPositiveClick: () => {
+                  table.loading = true
+                  api.get('/system/role/deleteAdminRole', {id: row.id}).then((res) => {
+                    if (res.code === 200) {
+                      message.success('操作成功')
+                      table.getList(true)
+                    } else {
+                      message.warning(res.msg)
+                      table.loading = false
+                    }
+                  })
+                },
+                onNegativeClick: () => {}
+              })
+            }
+          }, { 
+            default: () => '删除'
+          })
+        ]
+      )
+    }
+  }
+]
+const { table } = useTable('/system/role/getAdminRolePage', params, columns, {
   handleFiltersChange: (filters: DataTableFilterState) => {
     table.loading = true
     table.columns.forEach(item => {

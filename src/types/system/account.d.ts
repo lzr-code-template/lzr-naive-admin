@@ -25,15 +25,6 @@ interface FilterInter {
   search: () => void
 }
 
-interface TableInter {
-  loading: boolean
-  list: any[]
-  getList: (more: boolean) => void
-  pagination: any
-  columns: any[]
-  handleFiltersChange: (filters: DataTableFilterState) => void
-}
-
 interface ModalInter {
   show: boolean
   loading: boolean
@@ -60,6 +51,5 @@ interface ModalInter {
 export { 
   ParamsInter,
   FilterInter,
-  TableInter,
   ModalInter
 }
