@@ -22,8 +22,8 @@
        <div class="mr-10 mb-4 w-72 f-c space-x-2">
         <p class="shrink-0 text-sm">角色：</p>
         <n-select
-          v-model:value="filter.data.roleid" 
-          :options="filter.roleOptions" 
+          v-model:value="filter.data.roleid"
+          :options="filter.roleOptions"
           label-field="name"
           value-field="id"
           filterable clearable
@@ -48,7 +48,7 @@
           />
         </div>
         <div class="w-20">
-          <n-throttle-button 
+          <n-throttle-button
             type="primary"
             text="查询"
             block

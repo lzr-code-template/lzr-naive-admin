@@ -1,25 +1,24 @@
 <template>
   <header class="shrink-0 h-14 bg-white shadow-md shadow-primary/10 px-6 f-c-b z-20">
-    <component 
-      :is="collapsed ? Bars3Icon : Bars3CenterLeftIcon" 
-      class="w-5 h-5 text-t2 hover:text-t3 cursor-pointer"
+    <button
+      class="w-8 h-8 group"
       @click="collapsedChange"
-    />
+    >
+      <component
+        :is="collapsed ? Bars3Icon : Bars3CenterLeftIcon" 
+        class="w-5 h-5 text-t2 group-hover:text-t3"
+      />
+    </button>
     <div class="f-c space-x-5"> 
       <!-- 全屏切换 -->
-      <button 
-        class="w-8 h-8" 
+      <button
+        class="w-8 h-8 group"
         @click="toggle"
       >
-        <n-tooltip>
-          <template #trigger>
-            <component 
-              :is="isFullscreen ? ArrowsPointingInIcon : ArrowsPointingOutIcon" 
-              class="w-5 h-5 text-t2 hover:text-t3" 
-            />
-          </template>
-          <span>全屏切换</span>
-        </n-tooltip>
+        <component
+          :is="isFullscreen ? ArrowsPointingInIcon : ArrowsPointingOutIcon"
+          class="w-5 h-5 text-t2 group-hover:text-t3"
+        />
       </button>
       <!-- 头像 -->
       <n-dropdown 

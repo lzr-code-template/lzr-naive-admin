@@ -10,7 +10,7 @@
     @expand="collapsed = false"
     @update:collapsed="collapsedUpdate"
   >
-    <div class="h-14 f-c-c">
+    <div class="h-14 f-c-c cursor-default">
       <n-avatar 
         v-if="collapsed" 
         :src="logoImg"
