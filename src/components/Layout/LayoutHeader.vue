@@ -9,7 +9,7 @@
         class="w-5 h-5 text-t2 group-hover:text-t3"
       />
     </button>
-    <div class="f-c space-x-5"> 
+    <div class="f-c space-x-5">
       <!-- 全屏切换 -->
       <button
         class="w-8 h-8 group"
