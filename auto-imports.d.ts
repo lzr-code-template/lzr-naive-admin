@@ -13,6 +13,7 @@ declare global {
   const ElNotification: typeof import('element-plus/es')['ElNotification']
   const FormInst: typeof import('naive-ui')['FormInst']
   const NButton: typeof import('naive-ui')['NButton']
+  const NEllipsis: typeof import('naive-ui')['NEllipsis']
   const NTag: typeof import('naive-ui')['NTag']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']

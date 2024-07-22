@@ -4,7 +4,7 @@
       <div class="hidden lg:block lg:w-2/3 bg-login bg-cover">
         <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
           <div>
-            <h2 class="text-4xl font-bold text-white">YOUR CITY ADMIN</h2>
+            <h2 class="text-4xl font-bold text-white">LT转运后台管理系统</h2>
             <p class="max-w-xl mt-3 text-t1">When she was younger, she would pretend. That her bedroom was a castle, she was fairest in the land. And she got older, and it all changed. There was no time for make believe and all the magic slipped away</p>
           </div>
         </div>

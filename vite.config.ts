@@ -25,7 +25,8 @@ export default defineConfig({
             'useNotification',
             'useLoadingBar',
             'NTag',
-            'NButton'
+            'NButton',
+            'NEllipsis'
           ]
         }
       ]

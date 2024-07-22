@@ -49,7 +49,7 @@
         :pagination="table.pagination"
         :min-height="`${clientHeight - filter.height - 280}`"
         :max-height="`${clientHeight - filter.height - 280}`"
-        :scroll-x="1280"
+        :scroll-x="1024"
         @update:filters="table.handleFiltersChange"
       />
     </section>
