@@ -8,14 +8,15 @@ export const useLayoutStore = defineStore('layout', () => {
   // 折叠监听
   const collapsedUpdate = (collapsed: boolean) => {
     title.value = ''
-    if (!collapsed) setTimeout(() => title.value = 'LT转运后台管理系统', 150)
+    if (!collapsed) { setTimeout(() => title.value = 'LT转运后台管理系统', 150) }
   }
   // 折叠操作
   const collapsedChange = () => {
     if (collapsed.value) {
       collapsed.value = false
       setTimeout(() => title.value = 'LT转运后台管理系统', 150)
-    } else {
+    }
+    else {
       collapsed.value = true
       title.value = ''
     }
@@ -24,8 +25,8 @@ export const useLayoutStore = defineStore('layout', () => {
     title,
     collapsed,
     collapsedUpdate,
-    collapsedChange
+    collapsedChange,
   }
-},{
-  persist: true       // 支持持久化
+}, {
+  persist: true, // 支持持久化
 })

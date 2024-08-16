@@ -1,21 +1,21 @@
 import './assets/css/style.css'
 
 import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-
+import VueDOMPurifyHTML from 'vue-dompurify-html'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { setupRouter } from './router'
+import App from './App.vue'
+
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
-import VueDOMPurifyHTML from 'vue-dompurify-html'
-import VueCookies from "vue-cookies"
+async function setupApp() {
+  const app = createApp(App)
+  await setupRouter(app)
+  app.use(pinia)
+  app.use(VueDOMPurifyHTML)
+  app.mount('#app')
+}
 
-const app = createApp(App)
-app.provide('$cookies', VueCookies)
-
-app.use(router)
-app.use(pinia)
-app.use(VueDOMPurifyHTML)
-app.mount('#app')
+setupApp()

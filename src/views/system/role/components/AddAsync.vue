@@ -16,17 +16,17 @@
             <n-input
               v-model:value="form.name"
               placeholder="请输入角色名称"
-              clearable 
+              clearable
             />
           </n-form-item-gi>
           <n-form-item-gi :span="12" label="状态：" path="zaixian">
-            <n-select 
-              v-model:value="form.zaixian" 
-              :options="zaixianOptions" 
+            <n-select
+              v-model:value="form.zaixian"
+              :options="zaixianOptions"
             />
           </n-form-item-gi>
           <n-form-item-gi :span="24" label="选择权限：" path="perm">
-            <div class="border rounded w-full py-3 pl-3">
+            <div class="w-full rounded border py-3 pl-3">
               <n-scrollbar class="max-h-[500px]">
                 <n-tree
                   :data="perm.list"
@@ -45,10 +45,10 @@
             </div>
           </n-form-item-gi>
           <n-form-item-gi :span="24">
-            <div class="mt-4 f-c-c space-x-4 w-full">
+            <div class="f-c-c mt-4 w-full space-x-4">
               <div class="w-20">
-                <n-button 
-                  attr-type="button" 
+                <n-button
+                  attr-type="button"
                   block
                   @click="$router.back()"
                 >
@@ -56,8 +56,8 @@
                 </n-button>
               </div>
               <div class="w-20">
-                <n-throttle-button 
-                  type="primary" 
+                <n-throttle-button
+                  type="primary"
                   :loading="btnLoading"
                   block
                   text="保存"
@@ -73,12 +73,12 @@
 </template>
 
 <script setup lang="ts">
+import type { FormInst, FormItemRule } from 'naive-ui'
 import api from '@/api/index'
 import { useKeepaliveStore } from '@/store/keepalive'
-import { isNonEmptyArray } from '@/until/array'
-import type { FormInst, FormItemRule } from 'naive-ui'
+import { isNonEmptyArray } from '@/utils'
 
-type FormRules = { [itemValidatePath: string]: FormItemRule | Array<FormItemRule> | FormRules }
+interface FormRules { [itemValidatePath: string]: FormItemRule | Array<FormItemRule> | FormRules }
 
 const router = useRouter()
 const message = useMessage()
@@ -86,25 +86,25 @@ const btnLoading = ref<boolean>(false)
 
 const formRef = ref<FormInst | null>()
 const form = reactive({
-  name: '',         // 名称
-  zaixian: 1,       // 状态
-  perm: '',         // 权限
+  name: '', // 名称
+  zaixian: 1, // 状态
+  perm: '', // 权限
 })
-const rules:FormRules = {
-  name: [{ required: true, message: "请输入名称", trigger: ["blur", "input"] }],
-  perm: [{ required: true, message: "请选择权限", trigger: ["blur", "change"] }]
+const rules: FormRules = {
+  name: [{ required: true, message: '请输入名称', trigger: ['blur', 'input'] }],
+  perm: [{ required: true, message: '请选择权限', trigger: ['blur', 'change'] }],
 }
 
 const zaixianOptions = [
   { label: '禁用', value: 0 },
-  { label: '启用', value: 1 }
+  { label: '启用', value: 1 },
 ]
 
 const changeperm = (keys: Array<string | number>) => {
   form.perm = isNonEmptyArray(keys) ? JSON.stringify(keys) : ''
 }
 
-/** 保存数据 **/
+/** 保存数据 */
 const handleValidateClick = () => {
   formRef.value?.validate((errors) => {
     if (!errors) {
@@ -118,13 +118,15 @@ const handleValidateClick = () => {
           nextTick(() => {
             router.back()
           })
-        } else {
+        }
+        else {
           message.destroyAll()
           btnLoading.value = false
         }
       })
-    } else {
-      errors.forEach(item => {
+    }
+    else {
+      errors.forEach((item) => {
         message.warning(item[0].message as string)
       })
     }
@@ -133,8 +135,8 @@ const handleValidateClick = () => {
 // 权限列表获取
 const perm = reactive({
   default: [],
-  list: []
+  list: [],
 })
 const permRes = await api.get('/system/role/getPermList')
-if (permRes.code === 200) perm.list = permRes.data
+if (permRes.code === 200) { perm.list = permRes.data }
 </script>

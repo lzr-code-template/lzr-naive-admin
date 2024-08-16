@@ -1,37 +1,37 @@
 <template>
-  <header class="shrink-0 h-14 bg-white shadow-md shadow-primary/10 px-6 f-c-b z-20">
+  <header class="f-c-b z-20 h-14 shrink-0 bg-white px-6 shadow-md shadow-primary/10">
     <button
-      class="w-8 h-8 group"
+      class="group size-8"
       @click="collapsedChange"
     >
       <component
-        :is="collapsed ? Bars3Icon : Bars3CenterLeftIcon" 
-        class="w-5 h-5 text-t2 group-hover:text-t3"
+        :is="collapsed ? Bars3Icon : Bars3CenterLeftIcon"
+        class="size-5 text-t2 group-hover:text-t3"
       />
     </button>
     <div class="f-c space-x-5">
       <!-- 全屏切换 -->
       <button
-        class="w-8 h-8 group"
+        class="group size-8"
         @click="toggle"
       >
         <component
           :is="isFullscreen ? ArrowsPointingInIcon : ArrowsPointingOutIcon"
-          class="w-5 h-5 text-t2 group-hover:text-t3"
+          class="size-5 text-t2 group-hover:text-t3"
         />
       </button>
       <!-- 头像 -->
-      <n-dropdown 
-        trigger="hover" 
+      <n-dropdown
+        trigger="hover"
         :options="options"
-        @select="handleSelect"  
+        @select="handleSelect"
       >
-        <button class="group flex items-center cursor-pointer">
-          <div class="w-8 h-8 bg-gray-100 rounded-full f-c-c">
-            <UserIcon class="w-5 h-5 text-gray-400" />
+        <button class="group flex cursor-pointer items-center">
+          <div class="f-c-c size-8 rounded-full bg-gray-100">
+            <UserIcon class="size-5 text-gray-400" />
           </div>
-          <p class="ml-2.5 mr-1">{{ user.name }}</p>
-          <ChevronDownIcon class="mt-1 w-4 h-4" />
+          <p class="ml-2.5 mr-1">{{ useUserStore().user.name }}</p>
+          <ChevronDownIcon class="mt-1 size-4" />
         </button>
       </n-dropdown>
     </div>
@@ -40,15 +40,15 @@
 
 <script setup lang="ts">
 import { useFullscreen } from '@vueuse/core'
-import { UserIcon, ChevronDownIcon, Bars3CenterLeftIcon, Bars3Icon } from '@heroicons/vue/24/solid'
-import { HomeIcon, PowerIcon, ArrowsPointingOutIcon, ArrowsPointingInIcon } from '@heroicons/vue/24/outline'
+import { Bars3CenterLeftIcon, Bars3Icon, ChevronDownIcon, UserIcon } from '@heroicons/vue/24/solid'
+import { ArrowsPointingInIcon, ArrowsPointingOutIcon, HomeIcon, PowerIcon } from '@heroicons/vue/24/outline'
 import { useLayoutStore } from '@/store/layout'
+import { useUserStore } from '@/store/user'
 
 const router = useRouter()
 const message = useMessage()
 const dialog = useDialog()
-const $cookies = inject<any>('$cookies')
-const user = $cookies.get('user')
+
 const { collapsed, collapsedChange } = toRefs(useLayoutStore())
 
 /* 全屏切换 */
@@ -56,21 +56,21 @@ const { isFullscreen, toggle } = useFullscreen()
 
 /* 个人信息下拉菜单 */
 const options = [
-  { 
-    label: '首页', 
-    key: 'home', 
-    icon: () => h(HomeIcon, { class: 'ml-0.5 w-[1.125rem] h-[1.125rem]' }) 
+  {
+    label: '首页',
+    key: 'home',
+    icon: () => h(HomeIcon, { class: 'ml-0.5 w-[1.125rem] h-[1.125rem]' }),
   },
-  { 
-    label: '退出登录', 
+  {
+    label: '退出登录',
     key: 'logout',
-    icon: () => h(PowerIcon, { class: 'ml-0.5 w-[1.125rem] h-[1.125rem]' }) 
-  }
+    icon: () => h(PowerIcon, { class: 'ml-0.5 w-[1.125rem] h-[1.125rem]' }),
+  },
 ]
 const handleSelect = (key: string) => {
   if (key === 'home') {
     router.push('/')
-  } 
+  }
   if (key === 'logout') {
     dialog.info({
       title: '提示',
@@ -78,12 +78,12 @@ const handleSelect = (key: string) => {
       positiveText: '确定',
       negativeText: '取消',
       onPositiveClick: () => {
-        $cookies.remove('user')
-        $cookies.remove('token')
+        useUserStore().initUser()
+        localStorage.clear()
         message.success('成功退出登录')
         router.replace('/account/login')
       },
-      onNegativeClick: () => {}
+      onNegativeClick: () => {},
     })
   }
 }

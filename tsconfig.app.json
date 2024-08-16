@@ -1,24 +1,28 @@
 {
   "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "noEmit": true
+  },
   "include": [
-    "env.d.ts", 
-    "src/**/*", 
-    "src/**/*.vue", 
-    "src/**/*.json", 
+    "env.d.ts",
+    "src/**/*",
+    "src/**/*.vue",
+    "src/**/*.tsx",
+    "src/**/*.json",
+    "src/**/*.d.ts",
+    "src/**/*.ts",
     "auto-imports.d.ts",
     "components.d.ts",
     "src/store/*.ts",
     "src/api/*.ts",
-    "src/until/*.ts",
-    "src/custom-types.d.ts"
+    "src/utils/index.ts",
+    "src/custom-types.d.ts",
+    "src/types/*.d.ts"
   ],
-  "exclude": ["src/**/__tests__/*"],
-  "compilerOptions": {
-    "composite": true,
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
+  "exclude": ["src/**/__tests__/*"]
 }

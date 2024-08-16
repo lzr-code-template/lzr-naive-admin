@@ -5,8 +5,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import viteCompression from 'vite-plugin-compression'
 import DefineOptions from 'unplugin-vue-define-options/vite'
-import { getRootPath, getSrcPath } from './build/utils'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import { getRootPath, getSrcPath } from './build/utils'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,7 +16,7 @@ export default defineConfig({
     DefineOptions(),
     AutoImport({
       imports: [
-        'vue', 
+        'vue',
         'vue-router',
         {
           'naive-ui': [
@@ -26,19 +26,19 @@ export default defineConfig({
             'useLoadingBar',
             'NTag',
             'NButton',
-            'NEllipsis'
-          ]
-        }
-      ]
+            'NEllipsis',
+          ],
+        },
+      ],
     }),
     Components({
-      resolvers: [NaiveUiResolver()]
-    })
+      resolvers: [NaiveUiResolver()],
+    }),
   ],
   resolve: {
     alias: {
       '~': getRootPath(),
-      '@': getSrcPath()
+      '@': getSrcPath(),
     },
-  }
+  },
 })

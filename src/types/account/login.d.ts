@@ -5,6 +5,18 @@ interface LoginInter {
   password: string
 }
 
-export { 
-  LoginInter
+interface UserInter {
+  gender: string
+  id: number
+  inserttime: string
+  mobile: string
+  name: string
+  password: string
+  roleid: number
+  state: number
+}
+
+export {
+  LoginInter,
+  UserInter,
 }

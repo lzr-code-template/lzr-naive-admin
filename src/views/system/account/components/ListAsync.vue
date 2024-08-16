@@ -6,7 +6,7 @@
       class="flex flex-wrap"
     >
       <!-- 姓名 -->
-      <div class="mr-10 mb-4 w-72 f-c-c space-x-2">
+      <div class="f-c-c mb-4 mr-10 w-72 space-x-2">
         <p class="shrink-0 text-sm">姓名：</p>
         <n-input
           v-model:value="filter.data.name"
@@ -14,23 +14,24 @@
           clearable
         >
           <template #suffix>
-            <magnifying-glass-icon class="w-4 h-4 text-gray-400" />
+            <MagnifyingGlassIcon class="size-4 text-gray-400" />
           </template>
         </n-input>
       </div>
-       <!-- 角色 -->
-       <div class="mr-10 mb-4 w-72 f-c space-x-2">
+      <!-- 角色 -->
+      <div class="f-c mb-4 mr-10 w-72 space-x-2">
         <p class="shrink-0 text-sm">角色：</p>
         <n-select
           v-model:value="filter.data.roleid"
           :options="filter.roleOptions"
           label-field="name"
           value-field="id"
-          filterable clearable
+          filterable
+          clearable
         />
       </div>
       <!-- 状态 -->
-      <div class="mr-10 mb-4 w-72 f-c space-x-2">
+      <div class="f-c mb-4 mr-10 w-72 space-x-2">
         <p class="shrink-0 text-sm">状态：</p>
         <n-select
           v-model:value="filter.data.zaixian"
@@ -39,7 +40,7 @@
         />
       </div>
       <!-- btn -->
-      <div class="mr-10 mb-4 f-c space-x-4">
+      <div class="f-c mb-4 mr-10 space-x-4">
         <div class="w-20">
           <n-throttle-button
             text="重置"
@@ -56,9 +57,9 @@
           />
         </div>
       </div>
-      <div 
+      <div
         class="ml-auto w-20"
-        @click="modal.open('新增账号', null)"  
+        @click="modal.open('新增账号', null)"
       >
         <n-button block type="primary">新增</n-button>
       </div>
@@ -101,19 +102,20 @@
             <n-input v-model:value="modal.data.name" placeholder="请输入姓名" clearable />
           </n-form-item>
           <n-form-item label="性别：" path="gender">
-            <n-select 
-              v-model:value="modal.data.gender" 
-              :options="modal.genderOptions" 
+            <n-select
+              v-model:value="modal.data.gender"
+              :options="modal.genderOptions"
             />
           </n-form-item>
           <n-form-item label="角色：" path="roleid">
-            <n-select 
-              v-model:value="modal.data.roleid" 
-              :options="filter.roleOptions" 
+            <n-select
+              v-model:value="modal.data.roleid"
+              :options="filter.roleOptions"
               placeholder="请选择角色"
               label-field="name"
               value-field="id"
-              filterable clearable
+              filterable
+              clearable
             />
           </n-form-item>
           <n-form-item label="状态：" path="zaixian">
@@ -129,10 +131,10 @@
             </div>
           </n-form-item>
           <n-form-item>
-            <div class="mt-4 w-full f-c-c space-x-4">
+            <div class="f-c-c mt-4 w-full space-x-4">
               <div class="w-20">
-                <n-button 
-                  attr-type="button" 
+                <n-button
+                  attr-type="button"
                   block
                   @click="modal.show = false"
                 >
@@ -157,18 +159,14 @@
 </template>
 
 <script setup lang="ts">
-import api from '@/api/index'
-import { validatorMobile } from '@/until/validator'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { useElementSize, useWindowSize } from '@vueuse/core'
 import { pick } from 'lodash-es'
+import type { DataTableFilterState, FormInst, FormItemRule } from 'naive-ui'
+import api from '@/api/index'
+import { validatorMobile } from '@/utils'
 import { useTable } from '@/composables/useTable'
-import type { ParamsInter, FilterInter, ModalInter } from '@/types/system/account'
-import type { FormInst, FormItemRule, DataTableFilterState } from 'naive-ui'
-
-onMounted(() => {
-  table.getList(false)        // 获取表单
-})
+import type { FilterInter, ModalInter, ParamsInter } from '@/types/system/account'
 
 const router = useRouter()
 router.beforeEach((to, from, next) => {
@@ -180,17 +178,17 @@ router.beforeEach((to, from, next) => {
 })
 const message = useMessage()
 const clientHeight = useWindowSize().height
-const params:ParamsInter = reactive({
+const params: ParamsInter = reactive({
   size: 20,
   currentPage: 1,
   name: '',
   roleid: null,
-  zaixian: null
+  zaixian: null,
 })
 
-/** section1 筛选区 **/
+/** section1 筛选区 */
 const filterRef = ref()
-const filter:FilterInter = reactive({
+const filter: FilterInter = reactive({
   // 筛选区所占高度
   height: useElementSize(filterRef).height,
   // 角色 options
@@ -202,17 +200,17 @@ const filter:FilterInter = reactive({
   ],
   // 筛选区数据
   data: {
-    name: '',         // 名称
-    roleid: null,     // 角色id
-    zaixian: null     // 状态
+    name: '', // 名称
+    roleid: null, // 角色id
+    zaixian: null, // 状态
   },
   // 重置
   reset: () => {
     table.loading = true
     filter.data.name = params.name = ''
     filter.data.roleid = params.roleid = null
-    table.columns.forEach(item => {
-      if (item.key === 'zaixian') item.filterOptionValue = params.zaixian = filter.data.zaixian = null
+    table.columns.forEach((item) => {
+      if (item.key === 'zaixian') { item.filterOptionValue = params.zaixian = filter.data.zaixian = null }
     })
     nextTick(() => table.getList(false))
   },
@@ -221,52 +219,52 @@ const filter:FilterInter = reactive({
     table.loading = true
     params.name = filter.data.name
     params.roleid = filter.data.roleid
-    table.columns.forEach(item => {
-      if (item.key === 'zaixian') item.filterOptionValue = params.zaixian = filter.data.zaixian
+    table.columns.forEach((item) => {
+      if (item.key === 'zaixian') { item.filterOptionValue = params.zaixian = filter.data.zaixian }
     })
     nextTick(() => table.getList(false))
-  }
+  },
 })
 
-/** section2 表单区 **/
+/** section2 表单区 */
 const columns = [
-  { 
-    title: "序号", 
-    width: '70', 
+  {
+    title: '序号',
+    width: '70',
     align: 'center',
-    render(_: object, index: number) { return `${(table.pagination.page - 1) * table.pagination.pageSize + index + 1 }` }
+    render(_: object, index: number) { return `${(table.pagination.page - 1) * table.pagination.pageSize + index + 1}` },
   },
-  { 
-    title: "ID", 
-    key: "id", 
-    align: 'center'
+  {
+    title: 'ID',
+    key: 'id',
+    align: 'center',
   },
-  { 
-    title: "姓名", 
-    key: "name", 
-    align: 'center'
+  {
+    title: '姓名',
+    key: 'name',
+    align: 'center',
   },
-  { 
-    title: "性别", 
-    key: "gender", 
+  {
+    title: '性别',
+    key: 'gender',
     align: 'center',
     render(row: {
       gender: number
-    }) { return ['女', '男'][row.gender] }
+    }) { return ['女', '男'][row.gender] },
   },
-  { 
-    title: "手机号", 
-    key: "mobile", 
-    align: 'center'
+  {
+    title: '手机号',
+    key: 'mobile',
+    align: 'center',
   },
-  { 
-    title: "角色", 
-    key: "rolename", 
-    align: 'center'
+  {
+    title: '角色',
+    key: 'rolename',
+    align: 'center',
   },
-  { 
-    title: "状态", 
-    key: "zaixian",
+  {
+    title: '状态',
+    key: 'zaixian',
     align: 'center',
     render(row: {
       id: number
@@ -274,54 +272,58 @@ const columns = [
       zaixian: string
     }) {
       return h(
-        NTag, {
+        NTag,
+        {
           class: '-ml-5',
           size: 'small',
           bordered: false,
-          type: +row.zaixian === 0 ? 'error' : 'success'
-        },{
-          default: () => +row.zaixian === 0 ? '禁用' : '启用'
-        }
+          type: +row.zaixian === 0 ? 'error' : 'success',
+        },
+        {
+          default: () => +row.zaixian === 0 ? '禁用' : '启用',
+        },
       )
     },
     filter: true,
     filterMultiple: false,
     filterOptionValue: null,
-    filterOptions: filter.zaixianOptions
+    filterOptions: filter.zaixianOptions,
   },
-  { 
-    title: "操作", 
-    key: "", 
+  {
+    title: '操作',
+    key: '',
     align: 'center',
     fixed: 'right',
     render(row: {
       id: number
     }) {
       return h(
-        'div', { class: 'f-c-c space-x-2.5' }, [
+        'div',
+        { class: 'f-c-c space-x-2.5' },
+        [
           h(NButton, {
-            type: 'primary', 
-            text: true, 
-            onClick: () => modal.open('编辑账号', row.id)
-          }, { 
-            default: () => '编辑' 
-          })
-        ]
+            type: 'primary',
+            text: true,
+            onClick: () => modal.open('编辑账号', row.id),
+          }, {
+            default: () => '编辑',
+          }),
+        ],
       )
-    }
-  }
+    },
+  },
 ]
 const { table } = useTable('/system/account/getAdminUserPage', params, columns, {
   handleFiltersChange: (filters: DataTableFilterState) => {
     table.loading = true
-    table.columns.forEach(item => {
-      if (item.key === 'zaixian') item.filterOptionValue = params.zaixian = filter.data.zaixian = filters.zaixian as number | null
+    table.columns.forEach((item) => {
+      if (item.key === 'zaixian') { item.filterOptionValue = params.zaixian = filter.data.zaixian = filters.zaixian as number | null }
     })
     nextTick(() => table.getList(false))
-  }
+  },
 })
 
-/** modal **/
+/** modal */
 const formModalRef = ref<FormInst | null>()
 const modal: ModalInter = reactive({
   show: false,
@@ -330,22 +332,22 @@ const modal: ModalInter = reactive({
   title: '',
   genderOptions: [
     { label: '男', value: '1' },
-    { label: '女', value: '0' }
+    { label: '女', value: '0' },
   ],
   data: {
     id: null,
-    name: '',       // 姓名
-    gender: '0',    // 性别
-    roleid: null,   // 角色
-    zaixian: 1,     // 状态
-    mobile: '',     // 手机号
+    name: '', // 姓名
+    gender: '0', // 性别
+    roleid: null, // 角色
+    zaixian: 1, // 状态
+    mobile: '', // 手机号
   },
   rules: {
-    name: [{required: true, message: "请输入姓名", trigger: ["blur", "input"]}],
-    roleid: [{required: true, type: 'number', message: "请选择角色", trigger: ["blur", "change"]}],
+    name: [{ required: true, message: '请输入姓名', trigger: ['blur', 'input'] }],
+    roleid: [{ required: true, type: 'number', message: '请选择角色', trigger: ['blur', 'change'] }],
     mobile: [
-      {required: true, message: "请输入手机号", trigger: ["blur", "input"]},
-      {validator: (rule: FormItemRule, value: any) => validatorMobile(value), min: 11, max: 11, message: "手机号格式不正确", trigger: ["blur", "input"] }
+      { required: true, message: '请输入手机号', trigger: ['blur', 'input'] },
+      { validator: (rule: FormItemRule, value: any) => validatorMobile(value), min: 11, max: 11, message: '手机号格式不正确', trigger: ['blur', 'input'] },
     ],
   },
   init: () => {
@@ -354,7 +356,7 @@ const modal: ModalInter = reactive({
     modal.data.gender = '1'
     modal.data.zaixian = 1
   },
-  open: (title, id=null) => {
+  open: (title, id = null) => {
     modal.init()
     modal.title = title
     if (title === '新增账号') {
@@ -363,11 +365,12 @@ const modal: ModalInter = reactive({
     }
     if (title === '编辑账号') {
       modal.show = modal.loading = true
-      api.get('/system/account/updateAdminUserDetail', {id}).then((res) => {
+      api.get('/system/account/updateAdminUserDetail', { id }).then((res) => {
         if (res.code === 200) {
           Object.assign(modal.data, pick(res.data, ['id', 'name', 'gender', 'roleid', 'zaixian', 'mobile']))
           nextTick(() => modal.loading = false)
-        } else {
+        }
+        else {
           modal.show = modal.loading = false
         }
       })
@@ -386,7 +389,8 @@ const modal: ModalInter = reactive({
               modal.btnLoading = false
               message.success('操作成功')
               table.getList(false)
-            } else {
+            }
+            else {
               message.destroyAll()
               modal.btnLoading = false
             }
@@ -400,14 +404,16 @@ const modal: ModalInter = reactive({
               modal.btnLoading = false
               message.success('操作成功')
               table.getList(true)
-            } else {
+            }
+            else {
               message.destroyAll()
               modal.btnLoading = false
             }
           })
         }
-      } else {
-        errors.forEach(item => {
+      }
+      else {
+        errors.forEach((item) => {
           message.warning(item[0].message as string)
         })
       }
@@ -416,11 +422,15 @@ const modal: ModalInter = reactive({
 })
 
 const roleRes = await api.get('/system/account/getRoleList')
-if (roleRes.code === 200) filter.roleOptions = roleRes.data
+if (roleRes.code === 200) { filter.roleOptions = roleRes.data }
+
+onMounted(() => {
+  table.getList(false) // 获取表单
+})
 </script>
 
 <style>
 .n-data-table-filter-menu__action {
-  @apply flex items-center justify-end !important
+  @apply flex items-center justify-end !important;
 }
 </style>

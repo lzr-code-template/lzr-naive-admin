@@ -2,15 +2,15 @@
   <div class="w-full border">
     <Toolbar
       :editor="editorRef"
-      :defaultConfig="toolbarConfig"
+      :default-config="toolbarConfig"
       class="border-b"
     />
     <Editor
       v-model="val"
-      :defaultConfig="editorConfig"
+      :default-config="editorConfig"
       style="overflow-y: hidden"
       :style="{ height: `${props.height}px` }"
-      @onCreated="(editor: any) => handleCreated(editor)"
+      @on-created="(editor: any) => handleCreated(editor)"
     />
   </div>
 </template>
@@ -21,21 +21,20 @@ import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { useEditor } from '@/composables/useEditor'
 
-const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
   modelValue: String,
   url: {
     type: String,
-    default: '/open/addpic'
+    default: '/open/addpic',
   },
   height: {
     type: Number,
-    default: 300
-  }
+    default: 300,
+  },
 })
-
+const emit = defineEmits(['update:modelValue'])
 const val = ref(props.modelValue)
-watch(() => val.value, newVal => {
+watch(() => val.value, (newVal) => {
   emit('update:modelValue', newVal)
 })
 

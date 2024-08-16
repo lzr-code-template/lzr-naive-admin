@@ -1,28 +1,35 @@
+import type { App } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { setupRouterGuard } from './guard'
 import { basicRoutes } from './routes'
-import { useKeepaliveStore } from '@/store/keepalive'
-import NProgress from '@/until/progress'
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHashHistory(),
   routes: basicRoutes,
 })
 
-router.beforeEach((to, from, next) => {
-  NProgress.start()
-  if (to.path === '/account/login') {
-    next()
-  } else if (!$cookies.get('token')) {
-    useKeepaliveStore().clearKeepAlive()
-    next('/account/login')
-  } else {
-    if (to.meta.keepAlive) useKeepaliveStore().addKeepAlive(to.name as string)
-    next() // 继续导航
-  }
-})
+export async function setupRouter(app: App) {
+  setupRouterGuard(router)
+  app.use(router)
+}
 
-router.afterEach((to, from) => {
-  NProgress.done() // 进度条结束
-})
+// router.beforeEach((to, from, next) => {
+//   progress.start()
+//   if (to.path === '/account/login') {
+//     next()
+//   }
+//   else if (!$cookies.get('token')) {
+//     useKeepaliveStore().clearKeepAlive()
+//     next('/account/login')
+//   }
+//   else {
+//     if (to.meta.keepAlive) { useKeepaliveStore().addKeepAlive(to.name as string) }
+//     next() // 继续导航
+//   }
+// })
 
-export default router
+// router.afterEach(() => {
+//   progress.done() // 进度条结束
+// })
+
+// export default router

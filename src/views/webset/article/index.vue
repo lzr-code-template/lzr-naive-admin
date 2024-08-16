@@ -1,16 +1,16 @@
 <template>
   <page-card>
     <template #header>
-      <div class="h-14 border-b f-c space-x-1 text-sm font-normal cursor-default">
+      <div class="f-c h-14 cursor-default space-x-1 border-b text-sm font-normal">
         <p class="text-gray-400">网站管理</p>
-        <chevron-right-icon class="w-3.5 h-3.5 text-gray-400" />
+        <ChevronRightIcon class="size-3.5 text-gray-400" />
         <p class="text-primary">文章管理</p>
       </div>
     </template>
     <template #default>
       <suspense>
         <template #fallback>
-          <base-loading />
+          <BaseLoading />
         </template>
         <template #default>
           <ListAsync />
@@ -25,10 +25,10 @@ import { ChevronRightIcon } from '@heroicons/vue/24/solid'
 import BaseLoading from '@/components/Base/BaseLoading.vue'
 
 defineOptions({
-  name: 'WebsetArticle'
+  name: 'WebsetArticle',
 })
 
 const ListAsync = defineAsyncComponent(() =>
-  import('./components/ListAsync.vue')
+  import('./components/ListAsync.vue'),
 )
 </script>

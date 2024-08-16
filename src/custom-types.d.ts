@@ -1,4 +1,5 @@
-import { SlateDescendant, SlateElement, SlateText } from '@wangeditor/editor'
+import type { SlateDescendant } from '@wangeditor/editor'
+import { SlateElement, SlateText } from '@wangeditor/editor'
 
 declare module '@wangeditor/editor' {
   // 扩展 Text

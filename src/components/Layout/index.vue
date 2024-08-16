@@ -1,14 +1,14 @@
 <template>
   <n-layout has-sider>
-    <div class="w-full h-screen flex text-t3">
-      <layout-sidebar />
-      <div class="grow flex flex-col">
-        <layout-header />
-        <div class="bg-gray-100 p-4 grow overflow-hidden">
+    <div class="flex h-screen w-full text-t3">
+      <LayoutSidebar />
+      <div class="flex grow flex-col">
+        <LayoutHeader />
+        <div class="grow overflow-hidden bg-gray-100 p-4">
           <AppMain />
         </div>
       </div>
-  </div>
+    </div>
   </n-layout>
 </template>
 

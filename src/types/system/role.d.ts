@@ -15,11 +15,11 @@ interface FilterInter {
     label: string
     value: number
   }[]
-  reset: () => void
-  search: () => void
+  reset?: () => void
+  search?: () => void
 }
 
-export { 
+export {
   ParamsInter,
-  FilterInter
+  FilterInter,
 }

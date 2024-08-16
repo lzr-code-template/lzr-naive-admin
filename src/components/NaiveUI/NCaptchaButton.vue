@@ -1,6 +1,6 @@
 <template>
   <n-throttle-button
-    :="$attrs"
+    :="_attrs"
     :disabled="btn.disabled"
     :text="btn.text"
     @click="getCaptcha"
@@ -9,24 +9,25 @@
 
 <script setup lang="ts">
 import api from '@/api/index'
-// import { useMessage } from 'naive-ui'
 
-const message = useMessage()
-const $attrs = useAttrs()
 interface Props {
   url: string
-  time: number
+  time?: number
   mobile: string
 }
+
 const props = withDefaults(defineProps<Props>(), {
   url: '',
   time: 30,
-  mobile: ''
+  mobile: '',
 })
+// import { useMessage } from 'naive-ui'
 
+const message = useMessage()
+const _attrs = useAttrs()
 const btn = reactive({
   text: '发送验证码',
-  disabled: false
+  disabled: false,
 })
 
 const getCaptcha = () => {
@@ -37,7 +38,7 @@ const getCaptcha = () => {
   btn.disabled = true
   let i = props.time
   btn.text = `${i}s后重新发送`
-  let timer = setInterval(() => {
+  const timer = setInterval(() => {
     i -= 1
     btn.text = `${i}s后重新发送`
     if (i === 0) {
@@ -46,10 +47,11 @@ const getCaptcha = () => {
       btn.disabled = false
     }
   }, 1000)
-  api.get('/open/getCaptcha', {mobile: props.mobile}).then((res) => {
+  api.get('/open/getCaptcha', { mobile: props.mobile }).then((res) => {
     if (res.code === 20000) {
-
-    } else {
+      //
+    }
+    else {
       clearInterval(timer)
       btn.text = '发送验证码'
       btn.disabled = false
