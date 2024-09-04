@@ -39,12 +39,43 @@ export default [
       keepAlive: true,
     },
   },
+  // 网站管理 - 文章管理 - 编辑
   {
     path: '/webset/article/edit/:id',
     name: 'WebsetArticleEdit',
     component: () => import('@/views/webset/article/edit.vue'),
     meta: {
       name: 'WebsetArticle',
+      keepAlive: true,
+    },
+  },
+  /** ----- 网站管理 -> 增值服务 ----- */
+  {
+    path: '/webset/addserve',
+    name: 'WebsetAddserve',
+    component: () => import('@/views/webset/addserve/index.vue'),
+    meta: {
+      name: 'WebsetAddserve',
+      keepAlive: true,
+    },
+  },
+  // 网站管理 - 增值服务 - 添加
+  {
+    path: '/webset/addserve/add',
+    name: 'WebsetAddserveAdd',
+    component: () => import('@/views/webset/addserve/add.vue'),
+    meta: {
+      name: 'WebsetAddserve',
+      keepAlive: true,
+    },
+  },
+  // 网站管理 - 增值服务 - 编辑
+  {
+    path: '/webset/addserve/edit/:id',
+    name: 'WebsetAddserveEdit',
+    component: () => import('@/views/webset/addserve/edit.vue'),
+    meta: {
+      name: 'WebsetAddserve',
       keepAlive: true,
     },
   },

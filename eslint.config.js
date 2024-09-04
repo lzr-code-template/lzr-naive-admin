@@ -1,11 +1,13 @@
 import { stefanobartoletti, tailwind, vue } from '@stefanobartoletti/eslint-config'
 
 export default stefanobartoletti(
-  {}, // @antfu/eslint-config options, must always be present as first item even if empty
+  {},
   vue,
   tailwind,
   {
-    // ESlint Flat config rule object
-    'no-unused-expressions': 'off',
+    rules: {
+      // 禁用 no-use-before-define 规则，允许在定义前使用变量、函数和类
+      'ts/no-use-before-define': ['error', { classes: false, functions: false, variables: false }],
+    },
   },
 )

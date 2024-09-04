@@ -37,6 +37,7 @@ declare module 'vue' {
     NScrollbar: typeof import('naive-ui')['NScrollbar']
     NSelect: typeof import('naive-ui')['NSelect']
     NSpin: typeof import('naive-ui')['NSpin']
+    NTable: typeof import('naive-ui')['NTable']
     NThrottleButton: typeof import('./src/components/NaiveUI/NThrottleButton.vue')['default']
     NTooltip: typeof import('naive-ui')['NTooltip']
     NTree: typeof import('naive-ui')['NTree']

@@ -90,11 +90,8 @@ interface FormRules { [itemValidatePath: string]: FormItemRule | Array<FormItemR
 const router = useRouter()
 const message = useMessage()
 const btnLoading = ref<boolean>(false)
-const clazzOptions = ref<Array<SelectOption | SelectGroupOption>>([])
-const clazzChange = (val: any, option: any) => {
-  form.clazzname = option ? option.label : ''
-}
 
+/** 表单 */
 const formRef = ref<FormInst | null>()
 const form = reactive({
   clazzid: null, // 类型id
@@ -108,6 +105,12 @@ const rules: FormRules = {
   clazzid: [{ required: true, type: 'number', message: '请选择文章类型', trigger: ['blur', 'change'] }],
   ordervalue: [{ required: true, type: 'number', message: '请输入排序值', trigger: ['blur', 'input'] }],
   content: [{ required: true, validator: (rule: FormItemRule, value: any) => validatorEditor(value, '请填写文章内容') }],
+}
+
+/** 文章类型 */
+const clazzOptions = ref<Array<SelectOption | SelectGroupOption>>([])
+const clazzChange = (val: any, option: any) => {
+  form.clazzname = option ? option.label : ''
 }
 
 /** 保存数据 */
@@ -137,6 +140,7 @@ const handleValidateClick = () => {
   })
 }
 
+/** 获取文章类型 */
 const articleRes = await api.get('/article/getArticleClazz')
 if (articleRes.code === 200) { clazzOptions.value = articleRes.data }
 </script>

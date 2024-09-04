@@ -15,21 +15,22 @@ interface Props {
   time?: number
   mobile: string
 }
-
 const props = withDefaults(defineProps<Props>(), {
   url: '',
   time: 30,
   mobile: '',
 })
-// import { useMessage } from 'naive-ui'
 
 const message = useMessage()
 const _attrs = useAttrs()
+
+// 按钮
 const btn = reactive({
   text: '发送验证码',
   disabled: false,
 })
 
+// 获取验证码
 const getCaptcha = () => {
   if (!props.mobile) {
     message.warning('请填写手机号')

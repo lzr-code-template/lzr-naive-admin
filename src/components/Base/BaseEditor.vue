@@ -16,7 +16,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineModel } from 'vue'
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { useEditor } from '@/composables/useEditor'
@@ -38,9 +37,8 @@ watch(() => val.value, (newVal) => {
   emit('update:modelValue', newVal)
 })
 
-// 编辑器相关
+/** 编辑器相关 */
 const { toolbarConfig, editorConfig } = useEditor(`${import.meta.env.VITE_APP_URL + props.url}`)
-
 const editorRef = shallowRef()
 const handleCreated = (editor: any) => {
   editorRef.value = editor

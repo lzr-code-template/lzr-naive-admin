@@ -2,7 +2,6 @@
   <div class="py-4">
     <h2 class="text-lg font-bold">编辑文章</h2>
     <div class="mt-7 px-20">
-      {{ form }}
       <n-form
         ref="formRef"
         :model="form"
@@ -93,11 +92,8 @@ const route = useRoute()
 const router = useRouter()
 const message = useMessage()
 const btnLoading = ref<boolean>(false)
-const clazzOptions = ref<Array<SelectOption | SelectGroupOption>>([])
-const clazzChange = (val: any, option: any) => {
-  form.clazzname = option ? option.label : ''
-}
 
+/** 表单 */
 const formRef = ref<FormInst | null>()
 const form = reactive({
   articleid: route.params.id,
@@ -112,6 +108,12 @@ const rules: FormRules = {
   clazzid: [{ required: true, type: 'number', message: '请选择文章类型', trigger: ['blur', 'change'] }],
   ordervalue: [{ required: true, type: 'number', message: '请输入排序值', trigger: ['blur', 'input'] }],
   content: [{ required: true, validator: (rule: FormItemRule, value: any) => validatorEditor(value, '请填写文章内容') }],
+}
+
+/** 文章类型 */
+const clazzOptions = ref<Array<SelectOption | SelectGroupOption>>([])
+const clazzChange = (val: any, option: any) => {
+  form.clazzname = option ? option.label : ''
 }
 
 /** 保存数据 */
@@ -140,7 +142,7 @@ const handleValidateClick = () => {
   })
 }
 
-// 分类列表 和 文章详情
+/** 获取类型、详情 */
 try {
   const [clazzRes, detailRes] = await Promise.all([
     api.get('/article/getArticleClazz'),

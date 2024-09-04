@@ -19,12 +19,11 @@ const defaultConfig: AxiosRequestConfig = {
 }
 
 const http: AxiosInstance = axios.create(defaultConfig)
-const token = localStorage.getItem('token')
 
 // 在发起请求时进行拦截，获取token
 http.interceptors.request.use(
   (req) => {
-    req.headers.Authorization = token
+    req.headers.Authorization = localStorage.getItem('token') || ''
     return req
   },
   (error) => {
@@ -44,7 +43,7 @@ http.interceptors.response.use(
     }
   },
   (error) => {
-    if (error.response.status === 401 && token) {
+    if (error.response.status === 401 && localStorage.getItem('token')) {
       localStorage.clear()
       dialog.info({
         title: '提示',

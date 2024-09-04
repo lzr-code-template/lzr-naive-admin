@@ -75,10 +75,6 @@ const params: ParamsInter = reactive({
   clazzid: 0,
 })
 
-onMounted(() => {
-  table.getList(false) // 获取表单
-})
-
 router.beforeEach((to, from, next) => {
   if (from.name === 'WebsetArticleEdit') {
     table.loading = true
@@ -88,7 +84,7 @@ router.beforeEach((to, from, next) => {
 })
 
 /** section1 筛选区 */
-const filterRef = ref()
+const filterRef = ref<HTMLElement>()
 const filter: FilterInter = reactive({
   // 筛选区所占高度
   height: useElementSize(filterRef).height,
@@ -235,4 +231,6 @@ if (clazzRes.code === 200) {
     if (item.key === 'clazzname') { item.filterOptions = clazzRes.data }
   })
 }
+
+table.getList(false) // 获取表单
 </script>

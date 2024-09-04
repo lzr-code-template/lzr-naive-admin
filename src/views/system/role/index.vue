@@ -105,7 +105,7 @@ const params: ParamsInter = reactive({
 })
 
 /** section1 筛选区 */
-const filterRef = ref()
+const filterRef = ref<HTMLElement>()
 const filter: FilterInter = reactive({
   // 筛选区所占高度
   height: useElementSize(filterRef).height,

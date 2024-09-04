@@ -187,7 +187,7 @@ const params: ParamsInter = reactive({
 })
 
 /** section1 筛选区 */
-const filterRef = ref()
+const filterRef = ref<HTMLElement>()
 const filter: FilterInter = reactive({
   // 筛选区所占高度
   height: useElementSize(filterRef).height,
@@ -424,13 +424,5 @@ const modal: ModalInter = reactive({
 const roleRes = await api.get('/system/account/getRoleList')
 if (roleRes.code === 200) { filter.roleOptions = roleRes.data }
 
-onMounted(() => {
-  table.getList(false) // 获取表单
-})
+table.getList(false) // 获取表单
 </script>
-
-<style>
-.n-data-table-filter-menu__action {
-  @apply flex items-center justify-end !important;
-}
-</style>

@@ -5,7 +5,11 @@
         <div class="flex h-full items-center bg-gray-900 bg-opacity-40 px-20">
           <div>
             <h2 class="text-4xl font-bold text-white">LT转运后台管理系统</h2>
-            <p class="mt-3 max-w-xl text-t1">When she was younger, she would pretend. That her bedroom was a castle, she was fairest in the land. And she got older, and it all changed. There was no time for make believe and all the magic slipped away</p>
+            <p class="mt-3 max-w-xl text-t1">
+              When she was younger, she would pretend. That her bedroom was a castle, she
+              was fairest in the land. And she got older, and it all changed. There was no time for make believe and all
+              the magic slipped away
+            </p>
           </div>
         </div>
       </div>
@@ -40,10 +44,7 @@
                 />
               </div>
               <div class="mt-2 text-right">
-                <n-popover
-                  placement="top-start"
-                  trigger="hover"
-                >
+                <n-popover placement="top-start" trigger="hover">
                   <template #trigger>
                     <button class="text-sm text-placeholder hover:text-primary">忘记密码?</button>
                   </template>
@@ -78,12 +79,16 @@ const router = useRouter()
 const message = useMessage()
 const notification = useNotification()
 const btnLoading = ref<boolean>(false)
+
+/** 表单 */
 const loginInfo: LoginInter = reactive({
   loginType: true,
   captcha: '',
   phone: '',
   password: '',
 })
+
+/** 登录 */
 const handleLogin = (): void => {
   const { phone, password } = loginInfo
   if (!phone || !password) {

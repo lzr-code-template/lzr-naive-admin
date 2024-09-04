@@ -218,7 +218,7 @@ const columns = [
 const { table } = useTable('/order/getOrderPage', params, columns)
 
 /** section1 筛选区 */
-const filterRef = ref()
+const filterRef = ref<HTMLElement>()
 const filter: FilterInter = reactive({
   // 筛选区所占高度
   height: useElementSize(filterRef).height,
@@ -241,7 +241,5 @@ const filter: FilterInter = reactive({
   },
 })
 
-onMounted(() => {
-  table.getList(false) // 获取表单
-})
+table.getList(false) // 获取表单
 </script>

@@ -60,6 +60,7 @@ const menuOptions: MenuOption[] = [
       { label: () => h(RouterLink, { to: '/webset/swiper' }, { default: () => '轮播图' }), key: 'WebsetSwiper' },
       { label: () => h(RouterLink, { to: '/webset/mail' }, { default: () => '邮件模板' }), key: 'WebsetMail' },
       { label: () => h(RouterLink, { to: '/webset/article' }, { default: () => '文章管理' }), key: 'WebsetArticle' },
+      { label: () => h(RouterLink, { to: '/webset/addserve' }, { default: () => '增值服务' }), key: 'WebsetAddserve' },
     ],
   },
   {

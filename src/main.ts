@@ -7,6 +7,10 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { setupRouter } from './router'
 import App from './App.vue'
 
+const meta = document.createElement('meta')
+meta.name = 'naive-ui-style'
+document.head.appendChild(meta)
+
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 

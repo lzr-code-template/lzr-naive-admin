@@ -22,8 +22,10 @@ const props = withDefaults(defineProps<Props>(), {
   leading: true,
   trailing: false,
 })
+
 const emit = defineEmits(['click'])
 const _attrs = useAttrs()
+
 const handleClickThrottle = throttle(() => {
   emit('click')
 }, props.time, {

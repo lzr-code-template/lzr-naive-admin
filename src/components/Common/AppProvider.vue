@@ -85,4 +85,8 @@ const themeOverrides: GlobalThemeOverrides = {
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
+
+.n-data-table-filter-menu__action {
+  @apply flex items-center justify-end !important;
+}
 </style>

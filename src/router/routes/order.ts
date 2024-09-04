@@ -9,7 +9,7 @@ export default [
       keepAlive: true,
     },
   },
-  /** ----- 订单中心 -> 订单详情 ----- */
+  // 订单中心 - 订单列表 - 详情
   {
     path: '/order/order/detail/:id',
     name: 'OrderOrderListDetail',
