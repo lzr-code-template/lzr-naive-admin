@@ -2,14 +2,13 @@
   <NConfigProvider
     :locale="zhCN"
     :date-locale="dateZhCN"
-    :theme-overrides="themeOverrides"
+    :theme="layoutStore.isDark ? darkTheme : undefined"
+    :theme-overrides="layoutStore.themeOverrides"
   >
     <n-dialog-provider>
       <n-notification-provider>
         <n-message-provider>
-          <div class="text-gray-900">
-            <slot></slot>
-          </div>
+          <slot></slot>
         </n-message-provider>
       </n-notification-provider>
     </n-dialog-provider>
@@ -17,53 +16,15 @@
 </template>
 
 <script setup lang="ts">
-import { NConfigProvider, dateZhCN, zhCN } from 'naive-ui'
-import type { GlobalThemeOverrides } from 'naive-ui'
+import { NConfigProvider, darkTheme, dateZhCN, zhCN } from 'naive-ui'
+// import type { GlobalThemeOverrides } from 'naive-ui'
+import { useLayoutStore } from '@/store/layout'
 
-const themeOverrides: GlobalThemeOverrides = {
-  common: {
-    primaryColor: '#0064C8',
-    primaryColorHover: '#3793DE',
-    primaryColorPressed: '#004DAC',
-    primaryColorSuppl: '#3793DE',
+const layoutStore = useLayoutStore()
 
-    infoColor: '#2080F0',
-    infoColorHover: '#4098FC',
-    infoColorPressed: '#1060C9',
-    infoColorSuppl: '#4098FC',
-
-    successColor: '#47B3AA',
-    successColorHover: '#4DBFB6',
-    successColorPressed: '#3D9991',
-    successColorSuppl: '#4DBFB6',
-
-    warningColor: '#F0A020',
-    warningColorHover: '#FCB040',
-    warningColorPressed: '#C97C10',
-    warningColorSuppl: '#FCB040',
-
-    errorColor: '#ef4444',
-    errorColorHover: '#f87171',
-    errorColorPressed: '#dc2626',
-    errorColorSuppl: '#f87171',
-
-  },
-  Tree: {
-    fontSize: '14px',
-    nodeTextColor: '#606266',
-  },
-  Alert: {
-    borderRadius: '8px',
-  },
-  Tabs: {
-    tabTextColorActiveLine: '#47B3AA',
-    tabTextColorHoverLine: '#47B3AA',
-    tabTextColorActiveBar: '#47B3AA',
-    tabTextColorHoverBar: '#47B3AA',
-    tabTextColorActiveCard: '#47B3AA',
-    barColor: '#47B3AA',
-  },
-}
+watchEffect(() => {
+  layoutStore.setThemeColor(layoutStore.primaryColor, layoutStore.isDark)
+})
 </script>
 
 <style>

@@ -1,7 +1,7 @@
 <template>
   <page-card>
     <template #header>
-      <div class="f-c h-14 cursor-default space-x-1 border-b text-sm font-normal">
+      <div class="f-c h-14 cursor-default space-x-1 border-b text-sm font-normal dark:border-b-gray-700">
         <p class="text-gray-400">系统管理</p>
         <ChevronRightIcon class="size-3.5 text-gray-400" />
         <button

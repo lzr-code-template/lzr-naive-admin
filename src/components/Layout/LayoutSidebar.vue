@@ -1,30 +1,33 @@
 <template>
   <n-layout-sider
-    class="z-50 shadow-md"
+    bordered
     collapse-mode="width"
     :collapsed-width="64"
     :width="240"
     :collapsed="collapsed"
     show-trigger="bar"
+    :native-scrollbar="false"
     @collapse="collapsed = true"
     @expand="collapsed = false"
     @update:collapsed="collapsedUpdate"
   >
-    <div class="f-c-c h-14 cursor-default">
+    <div class="f-c-c h-14 cursor-default border-b dark:border-gray-700">
       <n-avatar
         v-if="collapsed"
         :src="logoImg"
         size="large"
       />
-      <h1 class="text-lg font-bold">{{ title }}</h1>
+      <h1 class="text-lg font-bold dark:text-white">{{ title }}</h1>
     </div>
-    <n-menu
-      v-model:value="active"
-      :collapsed="collapsed"
-      :collapsed-width="64"
-      :collapsed-icon-size="22"
-      :options="menuOptions"
-    />
+    <div class="pt-2">
+      <n-menu
+        v-model:value="active"
+        :collapsed="collapsed"
+        :collapsed-width="64"
+        :collapsed-icon-size="22"
+        :options="menuOptions"
+      />
+    </div>
   </n-layout-sider>
 </template>
 

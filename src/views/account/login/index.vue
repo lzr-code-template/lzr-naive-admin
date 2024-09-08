@@ -5,7 +5,7 @@
         <div class="flex h-full items-center bg-gray-900 bg-opacity-40 px-20">
           <div>
             <h2 class="text-4xl font-bold text-white">LT转运后台管理系统</h2>
-            <p class="mt-3 max-w-xl text-t1">
+            <p class="mt-3 max-w-xl text-t3">
               When she was younger, she would pretend. That her bedroom was a castle, she
               was fairest in the land. And she got older, and it all changed. There was no time for make believe and all
               the magic slipped away
@@ -17,7 +17,7 @@
         <div class="flex-1">
           <div class="text-center">
             <h2 class="text-center text-4xl font-bold text-t2 dark:text-white">欢迎登录</h2>
-            <p class="mt-3 text-t1 dark:text-t1">请输入您的账号密码</p>
+            <p class="mt-3 text-t3 dark:text-t3">请输入您的账号密码</p>
           </div>
           <div class="mt-8">
             <form>
