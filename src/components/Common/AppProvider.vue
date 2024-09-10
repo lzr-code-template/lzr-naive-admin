@@ -2,8 +2,8 @@
   <NConfigProvider
     :locale="zhCN"
     :date-locale="dateZhCN"
-    :theme="layoutStore.isDark ? darkTheme : undefined"
-    :theme-overrides="layoutStore.themeOverrides"
+    :theme="darkStore.isDark ? darkTheme : undefined"
+    :theme-overrides="themeStore.themeOverrides"
   >
     <n-dialog-provider>
       <n-notification-provider>
@@ -16,20 +16,22 @@
 </template>
 
 <script setup lang="ts">
+import type { GlobalThemeOverrides } from 'naive-ui'
 import { NConfigProvider, darkTheme, dateZhCN, zhCN } from 'naive-ui'
-// import type { GlobalThemeOverrides } from 'naive-ui'
-import { useLayoutStore } from '@/store/layout'
+import { generate, getRgbStr } from '@arco-design/color'
+import { useDarkStore, useThemeStore } from '@/store'
 
-const layoutStore = useLayoutStore()
+const themeStore = useThemeStore()
+const darkStore = useDarkStore()
 
 watchEffect(() => {
-  layoutStore.setThemeColor(layoutStore.primaryColor, layoutStore.isDark)
+  themeStore.setThemeColor(themeStore.primaryColor, darkStore.isDark)
 })
 </script>
 
 <style>
 #nprogress .bar {
-  background: #0064c8 !important;
+  background: rgba(var(--primary-color)) !important;
 }
 /* 设置滚动条滑块的样式 */
 /* 1,滚动条 */
@@ -49,5 +51,12 @@ watchEffect(() => {
 
 .n-data-table-filter-menu__action {
   @apply flex items-center justify-end !important;
+}
+
+html.dark {
+  --w-e-textarea-bg-color: #333;
+  --w-e-textarea-color: #fff;
+  --w-e-toolbar-bg-color: #333;
+  --w-e-toolbar-color: #fff;
 }
 </style>

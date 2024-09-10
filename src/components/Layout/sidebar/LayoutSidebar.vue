@@ -35,7 +35,7 @@
 import { RouterLink } from 'vue-router'
 import { Cog6ToothIcon, DocumentTextIcon, HomeIcon, UserIcon, WindowIcon } from '@heroicons/vue/24/outline'
 import type { MenuOption } from 'naive-ui'
-import { useLayoutStore } from '@/store/layout'
+import { useLayoutStore } from '@/store'
 import logoImg from '@/assets/images/logo.webp'
 
 const route = useRoute()

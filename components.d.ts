@@ -7,13 +7,16 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    AppMain: typeof import('./src/components/Layout/AppMain.vue')['default']
+    AppMain: typeof import('./src/components/Layout/content/AppMain.vue')['default']
     AppProvider: typeof import('./src/components/Common/AppProvider.vue')['default']
     BaseEditor: typeof import('./src/components/Base/BaseEditor.vue')['default']
     BaseLoading: typeof import('./src/components/Base/BaseLoading.vue')['default']
+    Fullscreen: typeof import('./src/components/Layout/header/components/Fullscreen.vue')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
-    LayoutHeader: typeof import('./src/components/Layout/LayoutHeader.vue')['default']
-    LayoutSidebar: typeof import('./src/components/Layout/LayoutSidebar.vue')['default']
+    LayoutContent: typeof import('./src/components/Layout/content/LayoutContent.vue')['default']
+    LayoutHeader: typeof import('./src/components/Layout/header/LayoutHeader.vue')['default']
+    LayoutSidebar: typeof import('./src/components/Layout/sidebar/LayoutSidebar.vue')['default']
+    MenuCollapse: typeof import('./src/components/Layout/header/components/MenuCollapse.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NButton: typeof import('naive-ui')['NButton']
     NCaptchaButton: typeof import('./src/components/NaiveUI/NCaptchaButton.vue')['default']
@@ -48,5 +51,10 @@ declare module 'vue' {
     PageCard: typeof import('./src/components/Common/PageCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SideLogo: typeof import('./src/components/Layout/sidebar/components/SideLogo.vue')['default']
+    SideMenu: typeof import('./src/components/Layout/sidebar/components/SideMenu.vue')['default']
+    ToggleTheme: typeof import('./src/components/Layout/header/components/ToggleTheme.vue')['default']
+    ToogleDark: typeof import('./src/components/Layout/header/components/ToogleDark.vue')['default']
+    UserAvatar: typeof import('./src/components/Layout/header/components/UserAvatar.vue')['default']
   }
 }

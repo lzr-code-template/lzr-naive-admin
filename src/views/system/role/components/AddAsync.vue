@@ -75,7 +75,7 @@
 <script setup lang="ts">
 import type { FormInst, FormItemRule } from 'naive-ui'
 import api from '@/api/index'
-import { useKeepaliveStore } from '@/store/keepalive'
+import { useKeepaliveStore } from '@/store'
 import { isNonEmptyArray } from '@/utils'
 
 interface FormRules { [itemValidatePath: string]: FormItemRule | Array<FormItemRule> | FormRules }
@@ -94,12 +94,10 @@ const rules: FormRules = {
   name: [{ required: true, message: '请输入名称', trigger: ['blur', 'input'] }],
   perm: [{ required: true, message: '请选择权限', trigger: ['blur', 'change'] }],
 }
-
 const zaixianOptions = [
   { label: '禁用', value: 0 },
   { label: '启用', value: 1 },
 ]
-
 const changeperm = (keys: Array<string | number>) => {
   form.perm = isNonEmptyArray(keys) ? JSON.stringify(keys) : ''
 }

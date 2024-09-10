@@ -44,7 +44,7 @@ http.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401 && localStorage.getItem('token')) {
-      localStorage.clear()
+      ['token', 'user'].forEach(item => localStorage.removeItem(item))
       dialog.info({
         title: '提示',
         content: '登录超时，请重新登录',

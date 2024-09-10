@@ -1,5 +1,5 @@
 import type { Router } from 'vue-router'
-import { useKeepaliveStore } from '@/store/keepalive'
+import { useKeepaliveStore } from '@/store'
 
 export function createPermissionGuard(router: Router) {
   router.beforeEach(async (to) => {

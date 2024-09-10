@@ -9,16 +9,15 @@
         label-placement="left"
         label-width="110"
         require-mark-placement="left"
-        class="w-3/4"
       >
-        <n-form-item label="文章标题" path="title" class="w-1/2">
+        <n-form-item label="文章标题：" path="title" class="w-1/2">
           <n-input
             v-model:value="form.title"
             placeholder="请输入文章标题"
             clearable
           />
         </n-form-item>
-        <n-form-item label="文章类型" path="clazzid" class="w-1/2">
+        <n-form-item label="文章类型：" path="clazzid" class="w-1/2">
           <n-select
             v-model:value="form.clazzid"
             placeholder="请选择文章类型"
@@ -27,7 +26,7 @@
             @update:value="clazzChange"
           />
         </n-form-item>
-        <n-form-item label="排序值" path="ordervalue">
+        <n-form-item label="排序值：" path="ordervalue">
           <div class="w-full space-y-2">
             <div class="f-c w-full space-x-2">
               <n-input-number
@@ -48,7 +47,7 @@
             <p class="text-xs text-placeholder">文章顺序将按照数字降序的方式展示</p>
           </div>
         </n-form-item>
-        <n-form-item label="文章内容" path="content">
+        <n-form-item label="文章内容：" path="content">
           <BaseEditor v-model="form.content" />
         </n-form-item>
         <n-form-item>
@@ -81,7 +80,7 @@
 <script setup lang="ts">
 import type { FormInst, FormItemRule, SelectGroupOption, SelectOption } from 'naive-ui'
 import api from '@/api/index'
-import { useKeepaliveStore } from '@/store/keepalive'
+import { useKeepaliveStore } from '@/store'
 import { validatorEditor } from '@/utils'
 import BaseEditor from '@/components/Base/BaseEditor.vue'
 

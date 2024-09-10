@@ -72,13 +72,14 @@
 <script setup lang="ts">
 import api from '@/api/index'
 import { Encrypt } from '@/utils'
-import { useUserStore } from '@/store/user'
+import { useUserStore } from '@/store'
 import type { LoginInter } from '@/types/account/login'
 
 const router = useRouter()
 const message = useMessage()
 const notification = useNotification()
 const btnLoading = ref<boolean>(false)
+const userStore = useUserStore()
 
 /** 表单 */
 const loginInfo: LoginInter = reactive({
@@ -103,7 +104,7 @@ const handleLogin = (): void => {
     }).then((res) => {
       if (res.code === 200) {
         localStorage.setItem('token', res.data.token)
-        useUserStore().setUser(res.data.user)
+        userStore.setUser(res.data.user)
         nextTick(() => {
           message.destroyAll()
           notification.success({
