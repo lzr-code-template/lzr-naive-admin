@@ -4,7 +4,7 @@
     :content-style="`padding: 12px; background-color: ${darkStore.isDark ? '#1e1e1e' : '#f0f2f5'}`"
   >
     <router-view v-slot="{ Component }" class="h-full">
-      <transition name="slide-fade" mode="out-in">
+      <transition name="fade-slide" mode="out-in">
         <keep-alive :include="keepaliveStore.includeList" :max="10">
           <component :is="Component" :key="$route.name" />
         </keep-alive>

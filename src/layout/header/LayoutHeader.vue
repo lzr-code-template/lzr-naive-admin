@@ -1,6 +1,6 @@
 <template>
   <n-layout-header
-    class="f-c-b z-20 h-14 px-6"
+    class="f-c-b z-20 h-14 shrink-0 px-6"
     bordered
   >
     <!-- 折叠菜单栏 -->

@@ -2,6 +2,7 @@
   <n-card
     :header-style="props.headerStyle"
     :content-style="props.contentStyle"
+    class="cus-scroll"
   >
     <template #header>
       <slot name="header"></slot>

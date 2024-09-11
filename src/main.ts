@@ -5,6 +5,7 @@ import VueDOMPurifyHTML from 'vue-dompurify-html'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { setupRouter } from './router'
+import { setupNaiveDiscreteApi } from './utils'
 import App from './App.vue'
 
 const meta = document.createElement('meta')
@@ -20,6 +21,7 @@ async function setupApp() {
   app.use(pinia)
   app.use(VueDOMPurifyHTML)
   app.mount('#app')
+  setupNaiveDiscreteApi()
 }
 
 setupApp()

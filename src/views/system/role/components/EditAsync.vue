@@ -80,7 +80,6 @@ import { isNonEmptyArray } from '@/utils'
 
 const route = useRoute()
 const router = useRouter()
-const message = useMessage()
 const btnLoading = ref(false)
 
 const formRef = ref<FormInst | null>()
@@ -108,25 +107,25 @@ const changeperm = (keys: Array<string | number>) => {
 const handleValidateClick = () => {
   formRef.value?.validate((errors) => {
     if (!errors) {
-      message.loading('保存中...')
+      $message?.loading('保存中...')
       btnLoading.value = true
       api.post('/system/role/updateAdminRole', form).then((res) => {
         if (res.code === 200) {
-          message.destroyAll()
-          message.success('操作成功')
+          $message?.destroyAll()
+          $message?.success('操作成功')
           nextTick(() => {
             router.back()
           })
         }
         else {
-          message.destroyAll()
+          $message?.destroyAll()
           btnLoading.value = false
         }
       })
     }
     else {
       errors.forEach((item) => {
-        message.warning(item[0].message as string)
+        $message?.warning(item[0].message as string)
       })
     }
   })

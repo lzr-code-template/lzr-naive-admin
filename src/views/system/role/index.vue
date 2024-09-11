@@ -94,8 +94,6 @@ defineOptions({
 })
 
 const router = useRouter()
-const message = useMessage()
-const dialog = useDialog()
 const clientHeight = useWindowSize().height
 const params: ParamsInter = reactive({
   size: 20,
@@ -209,7 +207,7 @@ const { table } = useTable(
               type: 'error',
               text: true,
               onClick: () => {
-                dialog.info({
+                $dialog?.info({
                   title: '提示',
                   content: `确定要删除该角色吗？`,
                   positiveText: '确定',
@@ -218,11 +216,11 @@ const { table } = useTable(
                     table.loading = true
                     api.get('/system/role/deleteAdminRole', { id: row.id }).then((res) => {
                       if (res.code === 200) {
-                        message.success('操作成功')
+                        $message?.success('操作成功')
                         table.getList(true)
                       }
                       else {
-                        message.warning(res.msg)
+                        $message?.warning(res.msg)
                         table.loading = false
                       }
                     })

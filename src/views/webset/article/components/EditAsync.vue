@@ -89,7 +89,6 @@ interface FormRules { [itemValidatePath: string]: FormItemRule | Array<FormItemR
 
 const route = useRoute()
 const router = useRouter()
-const message = useMessage()
 const btnLoading = ref<boolean>(false)
 
 /** 表单 */
@@ -119,24 +118,24 @@ const clazzChange = (val: any, option: any) => {
 const handleValidateClick = () => {
   formRef.value?.validate((errors) => {
     if (!errors) {
-      message.loading('保存中...')
+      $message?.loading('保存中...')
       btnLoading.value = true
       api.post('/article/updateArticle111', form).then((res) => {
         if (res.code === 200) {
           useKeepaliveStore().removeKeepAlive('WebsetArticle')
-          message.destroyAll()
-          message.success('操作成功')
+          $message?.destroyAll()
+          $message?.success('操作成功')
           nextTick(() => router.back())
         }
         else {
-          message.destroyAll()
+          $message?.destroyAll()
           btnLoading.value = false
         }
       })
     }
     else {
       errors.forEach((item) => {
-        message.warning(item[0].message as string)
+        $message?.warning(item[0].message as string)
       })
     }
   })

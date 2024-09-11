@@ -2,33 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-ul { @apply list-disc list-inside }
-ol { @apply list-decimal list-inside }
-
-.line-1 { @apply break-words line-clamp-1 }                                                          
-.line-2 { @apply break-words line-clamp-2 }
-.line-3 { @apply break-words line-clamp-3 } 
-
-.f-c { @apply flex items-center }
-.f-s { @apply flex items-start }
-.f-e { @apply flex items-end }
-.f-c-c { @apply flex items-center justify-center }
-.f-c-e { @apply flex items-center justify-end }
-.f-c-a { @apply flex items-center justify-around }
-.f-c-b { @apply flex items-center justify-between }
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-.slide-fade-leave-active {
-  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
-}
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-
+/* 默认输入框样式 */
 input, button, select, textarea {
   outline: none !important
 }
@@ -41,6 +15,79 @@ input::-webkit-inner-spin-button {
 }
 .member-form,.rpo-form input[type="number"] {
   -moz-appearance: textfield
+}
+
+/* 列表样式 */
+ul { @apply list-disc list-inside }
+ol { @apply list-decimal list-inside }
+
+/* line */
+.line-1 { @apply break-words line-clamp-1 }                                                          
+.line-2 { @apply break-words line-clamp-2 }
+.line-3 { @apply break-words line-clamp-3 } 
+
+/* flex */
+.f-c { @apply flex items-center }
+.f-s { @apply flex items-start }
+.f-e { @apply flex items-end }
+.f-c-c { @apply flex items-center justify-center }
+.f-c-e { @apply flex items-center justify-end }
+.f-c-a { @apply flex items-center justify-around }
+.f-c-b { @apply flex items-center justify-between }
+
+/* transition fade-slide */
+.fade-slide-leave-active,
+.fade-slide-enter-active {
+  transition: all 0.3s;
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* 自定义滚动条样式 */
+.cus-scroll {
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+}
+.cus-scroll-x {
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 8px;
+  }
+}
+.cus-scroll-y {
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 0;
+  }
+}
+.cus-scroll,
+.cus-scroll-x,
+.cus-scroll-y {
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 4px;
+  }
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background: #bfbfbf;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: rgb(var(--primary-color));
+    }
+  }
 }
 
 /* 切换主题的动画效果 */

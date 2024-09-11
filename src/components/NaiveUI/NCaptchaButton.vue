@@ -21,7 +21,6 @@ const props = withDefaults(defineProps<Props>(), {
   mobile: '',
 })
 
-const message = useMessage()
 const _attrs = useAttrs()
 
 // 按钮
@@ -33,7 +32,7 @@ const btn = reactive({
 // 获取验证码
 const getCaptcha = () => {
   if (!props.mobile) {
-    message.warning('请填写手机号')
+    $message?.warning('请填写手机号')
     return
   }
   btn.disabled = true

@@ -66,8 +66,6 @@ import type { FilterInter, ParamsInter } from '@/types/webset/article'
 
 const router = useRouter()
 const clientHeight = useWindowSize().height
-const message = useMessage()
-const dialog = useDialog()
 
 const params: ParamsInter = reactive({
   size: 20,
@@ -182,7 +180,7 @@ const columns = [
             type: 'error',
             text: true,
             onClick: () => {
-              dialog.info({
+              $dialog?.info({
                 title: '提示',
                 content: `确定要删除该文章吗？`,
                 positiveText: '确定',
@@ -191,11 +189,11 @@ const columns = [
                   table.loading = true
                   api.get('/article/deleteArticle', { id: row.id }).then((res) => {
                     if (res.code === 200) {
-                      message.success('操作成功')
+                      $message?.success('操作成功')
                       table.getList(true)
                     }
                     else {
-                      message.warning(res.msg)
+                      $message?.warning(res.msg)
                       table.loading = false
                     }
                   })

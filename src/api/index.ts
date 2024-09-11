@@ -4,7 +4,7 @@ import { parse, stringify } from 'qs'
 import { createDiscreteApi } from 'naive-ui'
 import { router } from '@/router'
 
-const { message, dialog } = createDiscreteApi(['message', 'dialog'])
+// const { message, dialog } = createDiscreteApi(['message', 'dialog'])
 
 const defaultConfig: AxiosRequestConfig = {
   baseURL: import.meta.env.VITE_APP_URL,
@@ -38,14 +38,14 @@ http.interceptors.response.use(
       return res.data
     }
     if (res.data.code === 404) {
-      message.warning(res.data.msg)
+      window.$message?.warning(res.data.msg)
       return res.data
     }
   },
   (error) => {
     if (error.response.status === 401 && localStorage.getItem('token')) {
       ['token', 'user'].forEach(item => localStorage.removeItem(item))
-      dialog.info({
+      window.$dialog?.info({
         title: '提示',
         content: '登录超时，请重新登录',
         positiveText: '确定',

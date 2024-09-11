@@ -176,7 +176,7 @@ router.beforeEach((to, from, next) => {
   }
   next()
 })
-const message = useMessage()
+
 const clientHeight = useWindowSize().height
 const params: ParamsInter = reactive({
   size: 20,
@@ -379,19 +379,19 @@ const modal: ModalInter = reactive({
   handleValidateClick: () => {
     formModalRef.value?.validate((errors) => {
       if (!errors) {
-        message.loading('操作中...')
+        $message?.loading('操作中...')
         modal.btnLoading = true
         if (modal.title === '新增账号') {
           api.post('/system/account/addAdminUser', modal.data).then((res) => {
             if (res.code === 200) {
-              message.destroyAll()
+              $message?.destroyAll()
               modal.show = false
               modal.btnLoading = false
-              message.success('操作成功')
+              $message?.success('操作成功')
               table.getList(false)
             }
             else {
-              message.destroyAll()
+              $message?.destroyAll()
               modal.btnLoading = false
             }
           })
@@ -399,14 +399,14 @@ const modal: ModalInter = reactive({
         if (modal.title === '编辑账号') {
           api.post('/system/account/updateAdminUser', modal.data).then((res) => {
             if (res.code === 200) {
-              message.destroyAll()
+              $message?.destroyAll()
               modal.show = false
               modal.btnLoading = false
-              message.success('操作成功')
+              $message?.success('操作成功')
               table.getList(true)
             }
             else {
-              message.destroyAll()
+              $message?.destroyAll()
               modal.btnLoading = false
             }
           })
@@ -414,7 +414,7 @@ const modal: ModalInter = reactive({
       }
       else {
         errors.forEach((item) => {
-          message.warning(item[0].message as string)
+          $message?.warning(item[0].message as string)
         })
       }
     })

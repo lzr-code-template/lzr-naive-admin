@@ -76,8 +76,6 @@ import { useUserStore } from '@/store'
 import type { LoginInter } from '@/types/account/login'
 
 const router = useRouter()
-const message = useMessage()
-const notification = useNotification()
 const btnLoading = ref<boolean>(false)
 const userStore = useUserStore()
 
@@ -93,10 +91,10 @@ const loginInfo: LoginInter = reactive({
 const handleLogin = (): void => {
   const { phone, password } = loginInfo
   if (!phone || !password) {
-    message.warning('请输入用户名和密码')
+    $message?.warning('请输入用户名和密码')
   }
   else {
-    message.loading('登录中...')
+    $message?.loading('登录中...')
     btnLoading.value = true
     api.post('/open/login', {
       phone,
@@ -106,8 +104,8 @@ const handleLogin = (): void => {
         localStorage.setItem('token', res.data.token)
         userStore.setUser(res.data.user)
         nextTick(() => {
-          message.destroyAll()
-          notification.success({
+          $message?.destroyAll()
+          $notification?.success({
             content: '登录成功',
             meta: `欢迎你，${res.data.user.name}`,
             duration: 2500,
@@ -116,17 +114,17 @@ const handleLogin = (): void => {
         })
       }
       else {
-        message.destroyAll()
+        $message?.destroyAll()
         btnLoading.value = false
       }
     }).catch(() => {
-      message.destroyAll()
+      $message?.destroyAll()
       btnLoading.value = false
     })
     setTimeout(() => {
       if (btnLoading.value) {
         btnLoading.value = false
-        message.destroyAll()
+        $message?.destroyAll()
       }
     }, 10000)
   }

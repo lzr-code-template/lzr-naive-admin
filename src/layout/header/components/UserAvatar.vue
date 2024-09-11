@@ -22,8 +22,6 @@ import { useUserStore } from '@/store'
 import avatarImg from '@/assets/images/logo.webp'
 
 const router = useRouter()
-const message = useMessage()
-const dialog = useDialog()
 const userStore = useUserStore()
 
 const options = [
@@ -43,7 +41,7 @@ const handleSelect = (key: string) => {
     router.push('/')
   }
   if (key === 'logout') {
-    dialog.info({
+    $dialog?.info({
       title: '提示',
       content: '您确定要退出登录吗',
       positiveText: '确定',
@@ -51,7 +49,7 @@ const handleSelect = (key: string) => {
       onPositiveClick: () => {
         ['token', 'user'].forEach(item => localStorage.removeItem(item))
         userStore.initUser()
-        message.success('成功退出登录')
+        $message?.success('成功退出登录')
         router.replace('/account/login')
       },
       onNegativeClick: () => {},

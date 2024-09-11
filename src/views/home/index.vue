@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-3">
+  <div class="h-auto space-y-3">
     <div class="flex space-x-3">
       <div class="w-2/5 shrink-0">
         <n-card class="h-full">
@@ -73,7 +73,7 @@
               ，审美在线，主题轻松定制
             </li>
             <li class="py-2">
-              👏 先进且易于理解的文件结构设计，多个模块之间
+              🍒 先进且易于理解的文件结构设计，多个模块之间
               <b>零耦合</b>
               ，单个业务模块删除不影响其他模块
             </li>

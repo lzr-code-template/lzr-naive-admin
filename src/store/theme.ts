@@ -23,7 +23,7 @@ export const useThemeStore = defineStore('theme', () => {
   const setPrimaryColor = (color: string) => {
     primaryColor.value = color
   }
-  const setThemeColor = (color = primaryColor.value, isDark = useDark()) => {
+  const setThemeColor = (color = primaryColor.value, isDark: boolean = useDark() as unknown as boolean) => {
     const colors = generate(color, {
       list: true,
       dark: isDark,
