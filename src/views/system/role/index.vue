@@ -1,12 +1,5 @@
 <template>
   <page-card>
-    <template #header>
-      <div class="f-c h-14 cursor-default space-x-1 border-b text-sm font-normal dark:border-b-gray-700">
-        <p class="text-gray-400">系统管理</p>
-        <ChevronRightIcon class="size-3.5 text-gray-400" />
-        <p class="text-primary">角色管理</p>
-      </div>
-    </template>
     <template #default>
       <main class="space-y-2 py-4">
         <!-- section: 筛选区 -->
@@ -82,7 +75,7 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronRightIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import { useElementSize, useWindowSize } from '@vueuse/core'
 import type { DataTableFilterState } from 'naive-ui'
 import api from '@/api/index'
@@ -207,7 +200,7 @@ const { table } = useTable(
               type: 'error',
               text: true,
               onClick: () => {
-                $dialog?.info({
+                window.$dialog?.info({
                   title: '提示',
                   content: `确定要删除该角色吗？`,
                   positiveText: '确定',
@@ -216,11 +209,11 @@ const { table } = useTable(
                     table.loading = true
                     api.get('/system/role/deleteAdminRole', { id: row.id }).then((res) => {
                       if (res.code === 200) {
-                        $message?.success('操作成功')
+                        window.$message?.success('操作成功')
                         table.getList(true)
                       }
                       else {
-                        $message?.warning(res.msg)
+                        window.$message?.warning(res.msg)
                         table.loading = false
                       }
                     })

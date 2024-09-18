@@ -32,7 +32,7 @@ const btn = reactive({
 // 获取验证码
 const getCaptcha = () => {
   if (!props.mobile) {
-    $message?.warning('请填写手机号')
+    window.$message?.warning('请填写手机号')
     return
   }
   btn.disabled = true

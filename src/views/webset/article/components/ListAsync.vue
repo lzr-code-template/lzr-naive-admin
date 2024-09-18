@@ -180,7 +180,7 @@ const columns = [
             type: 'error',
             text: true,
             onClick: () => {
-              $dialog?.info({
+              window.$dialog?.info({
                 title: '提示',
                 content: `确定要删除该文章吗？`,
                 positiveText: '确定',
@@ -189,11 +189,11 @@ const columns = [
                   table.loading = true
                   api.get('/article/deleteArticle', { id: row.id }).then((res) => {
                     if (res.code === 200) {
-                      $message?.success('操作成功')
+                      window.$message?.success('操作成功')
                       table.getList(true)
                     }
                     else {
-                      $message?.warning(res.msg)
+                      window.$message?.warning(res.msg)
                       table.loading = false
                     }
                   })

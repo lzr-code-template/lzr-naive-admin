@@ -1,5 +1,7 @@
+import { UserIcon } from '@heroicons/vue/24/outline'
+
 export default [
-  /** ----- 用户中心 -> 用户列表 ----- */
+  /** ----- 用户管理 -> 用户列表 ----- */
   {
     path: '/user/user',
     name: 'UserUser',
@@ -7,9 +9,13 @@ export default [
     meta: {
       name: 'UserUser',
       keepAlive: true,
+      breadItems: [
+        { title: '用户管理', icon: UserIcon, path: null, breadKey: 'user' },
+        { title: '用户列表', path: null },
+      ],
     },
   },
-  /** ----- 用户中心 -> 身份证列表 ----- */
+  /** ----- 用户管理 -> 身份证列表 ----- */
   {
     path: '/user/IDcard',
     name: 'UserIDcard',
@@ -17,6 +23,10 @@ export default [
     meta: {
       name: 'UserIDcard',
       keepAlive: true,
+      breadItems: [
+        { title: '用户管理', icon: UserIcon, path: null, breadKey: 'user' },
+        { title: '身份证列表', path: null },
+      ],
     },
   },
 ]

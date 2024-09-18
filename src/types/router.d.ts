@@ -1,8 +1,17 @@
 import type { RouteRecordRaw } from 'vue-router'
 
+interface breadInter {
+  title: string
+  path: string | null
+  icon?: FunctionalComponent<HTMLAttributes & VNodeProps>
+  children?: breadInter[] | null
+  breadKey?: string
+}
+
 interface Meta {
   name: string
   keepAlive: boolean
+  breadItems?: breadInter[]
 }
 
 interface RouteItem {
@@ -24,4 +33,5 @@ export {
   RouteModule,
   RouteType,
   RoutesType,
+  breadInter,
 }

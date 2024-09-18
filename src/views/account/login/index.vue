@@ -91,10 +91,10 @@ const loginInfo: LoginInter = reactive({
 const handleLogin = (): void => {
   const { phone, password } = loginInfo
   if (!phone || !password) {
-    $message?.warning('请输入用户名和密码')
+    window.$message?.warning('请输入用户名和密码')
   }
   else {
-    $message?.loading('登录中...')
+    window.$message?.loading('登录中...')
     btnLoading.value = true
     api.post('/open/login', {
       phone,
@@ -104,8 +104,8 @@ const handleLogin = (): void => {
         localStorage.setItem('token', res.data.token)
         userStore.setUser(res.data.user)
         nextTick(() => {
-          $message?.destroyAll()
-          $notification?.success({
+          window.$message?.destroyAll()
+          window.$notification?.success({
             content: '登录成功',
             meta: `欢迎你，${res.data.user.name}`,
             duration: 2500,
@@ -114,17 +114,17 @@ const handleLogin = (): void => {
         })
       }
       else {
-        $message?.destroyAll()
+        window.$message?.destroyAll()
         btnLoading.value = false
       }
     }).catch(() => {
-      $message?.destroyAll()
+      window.$message?.destroyAll()
       btnLoading.value = false
     })
     setTimeout(() => {
       if (btnLoading.value) {
         btnLoading.value = false
-        $message?.destroyAll()
+        window.$message?.destroyAll()
       }
     }, 10000)
   }

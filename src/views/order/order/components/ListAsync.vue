@@ -14,7 +14,7 @@
           clearable
         >
           <template #suffix>
-            <magnifying-glass-icon class="size-4 text-gray-400" />
+            <MagnifyingGlassIcon class="size-4 text-gray-400" />
           </template>
         </n-input>
       </div>
@@ -62,6 +62,7 @@
 
 <script setup lang="ts">
 import { useElementSize, useWindowSize } from '@vueuse/core'
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid'
 import api from '@/api/index'
 import { useTable } from '@/composables/useTable'
 import type { FilterInter, ParamsInter, TabsInter } from '@/types/order/order'

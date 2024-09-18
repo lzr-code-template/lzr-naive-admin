@@ -41,7 +41,7 @@ const handleSelect = (key: string) => {
     router.push('/')
   }
   if (key === 'logout') {
-    $dialog?.info({
+    window.$dialog?.info({
       title: '提示',
       content: '您确定要退出登录吗',
       positiveText: '确定',
@@ -49,7 +49,7 @@ const handleSelect = (key: string) => {
       onPositiveClick: () => {
         ['token', 'user'].forEach(item => localStorage.removeItem(item))
         userStore.initUser()
-        $message?.success('成功退出登录')
+        window.$message?.success('成功退出登录')
         router.replace('/account/login')
       },
       onNegativeClick: () => {},

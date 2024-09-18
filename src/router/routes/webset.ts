@@ -1,3 +1,5 @@
+import { WindowIcon } from '@heroicons/vue/24/outline'
+
 export default [
   /** ----- 网站管理 -> 轮播图 ----- */
   {
@@ -7,6 +9,10 @@ export default [
     meta: {
       name: 'WebsetSwiper',
       keepAlive: true,
+      breadItems: [
+        { title: '网站管理', icon: WindowIcon, path: null, breadKey: 'webset' },
+        { title: '轮播图', path: null },
+      ],
     },
   },
   /** ----- 网站管理 -> 邮件模版 ----- */
@@ -17,6 +23,10 @@ export default [
     meta: {
       name: 'WebsetMail',
       keepAlive: true,
+      breadItems: [
+        { title: '网站管理', icon: WindowIcon, path: null, breadKey: 'webset' },
+        { title: '邮件模板', path: null },
+      ],
     },
   },
   /** ----- 网站管理 -> 文章管理 ----- */
@@ -27,6 +37,10 @@ export default [
     meta: {
       name: 'WebsetArticle',
       keepAlive: true,
+      breadItems: [
+        { title: '网站管理', icon: WindowIcon, path: null, breadKey: 'webset' },
+        { title: '文章管理', path: null },
+      ],
     },
   },
   // 网站管理 - 文章管理 - 添加
@@ -37,6 +51,11 @@ export default [
     meta: {
       name: 'WebsetArticle',
       keepAlive: true,
+      breadItems: [
+        { title: '网站管理', icon: WindowIcon, path: null, breadKey: 'webset' },
+        { title: '文章管理', path: '/webset/article' },
+        { title: '新建文章', path: null },
+      ],
     },
   },
   // 网站管理 - 文章管理 - 编辑
@@ -47,6 +66,11 @@ export default [
     meta: {
       name: 'WebsetArticle',
       keepAlive: true,
+      breadItems: [
+        { title: '网站管理', icon: WindowIcon, path: null, breadKey: 'webset' },
+        { title: '文章管理', path: '/webset/article' },
+        { title: '编辑文章', path: null },
+      ],
     },
   },
   /** ----- 网站管理 -> 增值服务 ----- */
@@ -57,6 +81,10 @@ export default [
     meta: {
       name: 'WebsetAddserve',
       keepAlive: true,
+      breadItems: [
+        { title: '网站管理', icon: WindowIcon, path: null, breadKey: 'webset' },
+        { title: '增值服务', path: null },
+      ],
     },
   },
   // 网站管理 - 增值服务 - 添加
@@ -67,6 +95,11 @@ export default [
     meta: {
       name: 'WebsetAddserve',
       keepAlive: true,
+      breadItems: [
+        { title: '网站管理', icon: WindowIcon, path: null, breadKey: 'webset' },
+        { title: '增值服务', path: '/webset/addserve' },
+        { title: '新建服务', path: null },
+      ],
     },
   },
   // 网站管理 - 增值服务 - 编辑
@@ -77,6 +110,11 @@ export default [
     meta: {
       name: 'WebsetAddserve',
       keepAlive: true,
+      breadItems: [
+        { title: '网站管理', icon: WindowIcon, path: null, breadKey: 'webset' },
+        { title: '增值服务', path: '/webset/addserve' },
+        { title: '编辑服务', path: null },
+      ],
     },
   },
 ]

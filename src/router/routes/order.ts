@@ -1,5 +1,7 @@
+import { DocumentTextIcon } from '@heroicons/vue/24/outline'
+
 export default [
-  /** ----- 订单中心 -> 订单列表 ----- */
+  /** ----- 订单管理 -> 订单列表 ----- */
   {
     path: '/order/order',
     name: 'OrderOrder',
@@ -7,6 +9,10 @@ export default [
     meta: {
       name: 'OrderOrder',
       keepAlive: true,
+      breadItems: [
+        { title: '订单管理', icon: DocumentTextIcon, path: null, breadKey: 'order' },
+        { title: '订单列表', path: null },
+      ],
     },
   },
   // 订单中心 - 订单列表 - 详情
@@ -17,6 +23,11 @@ export default [
     meta: {
       name: 'OrderOrder',
       keepAlive: true,
+      breadItems: [
+        { title: '订单管理', icon: DocumentTextIcon, path: null, breadKey: 'order' },
+        { title: '订单列表', path: '/order/order' },
+        { title: '订单详情', path: null },
+      ],
     },
   },
 ]

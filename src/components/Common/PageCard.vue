@@ -1,25 +1,13 @@
 <template>
-  <n-card
-    :header-style="props.headerStyle"
-    :content-style="props.contentStyle"
-    class="cus-scroll"
-  >
-    <template #header>
-      <slot name="header"></slot>
-    </template>
-    <template #default>
+  <div class="flex size-full flex-col rounded bg-white px-6 dark:bg-t2/50">
+    <div class="h-14 shrink-0 cursor-default border-b dark:border-b-gray-700">
+      <BreadCrumb />
+    </div>
+    <div class="grow">
       <slot name="default"></slot>
-    </template>
-  </n-card>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-interface Props {
-  headerStyle?: string
-  contentStyle?: string
-}
-const props = withDefaults(defineProps<Props>(), {
-  headerStyle: 'padding: 0 1.5rem',
-  contentStyle: 'padding: 0 1.5rem',
-})
 </script>

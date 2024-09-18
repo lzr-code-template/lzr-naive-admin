@@ -1,3 +1,5 @@
+import { Cog6ToothIcon } from '@heroicons/vue/24/outline'
+
 export default [
   /** ----- 系统管理 -> 角色管理 ----- */
   {
@@ -7,6 +9,10 @@ export default [
     meta: {
       name: 'SystemRole',
       keepAlive: true,
+      breadItems: [
+        { title: '系统管理', icon: Cog6ToothIcon, path: null, breadKey: 'system' },
+        { title: '角色管理', path: null },
+      ],
     },
   },
   // 系统管理 - 角色管理 - 添加
@@ -17,6 +23,11 @@ export default [
     meta: {
       name: 'SystemRole',
       keepAlive: false,
+      breadItems: [
+        { title: '系统管理', icon: Cog6ToothIcon, path: null, breadKey: 'system' },
+        { title: '角色管理', path: '/system/role' },
+        { title: '添加角色', path: null },
+      ],
     },
   },
   // 系统管理 - 角色管理 - 编辑
@@ -27,6 +38,11 @@ export default [
     meta: {
       name: 'SystemRole',
       keepAlive: false,
+      breadItems: [
+        { title: '系统管理', icon: Cog6ToothIcon, path: null, breadKey: 'system' },
+        { title: '角色管理', path: '/system/role' },
+        { title: '编辑角色', path: null },
+      ],
     },
   },
   /** ----- 系统管理 -> 账号管理 ----- */
@@ -37,6 +53,10 @@ export default [
     meta: {
       name: 'SystemAccount',
       keepAlive: true,
+      breadItems: [
+        { title: '系统管理', icon: Cog6ToothIcon, path: null, breadKey: 'system' },
+        { title: '账号管理', path: null },
+      ],
     },
   },
 ]
