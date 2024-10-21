@@ -65,7 +65,7 @@
             :pagination="table.pagination"
             :min-height="`${clientHeight - filter.height - 280}`"
             :max-height="`${clientHeight - filter.height - 280}`"
-            :scroll-x="1024"
+            :scroll-x="1280"
             @update:filters="table.handleFiltersChange"
           />
         </section>
@@ -152,6 +152,7 @@ const { table } = useTable(
       title: '状态',
       key: 'zaixian',
       align: 'center',
+      width: '130',
       render(row: {
         id: number
         name: string
@@ -179,6 +180,7 @@ const { table } = useTable(
       title: '操作',
       key: '',
       align: 'center',
+      width: '150',
       fixed: 'right',
       render(row: {
         id: number

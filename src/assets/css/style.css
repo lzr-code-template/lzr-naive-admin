@@ -52,7 +52,7 @@ ol { @apply list-decimal list-inside }
 }
 
 /* 自定义滚动条样式 */
-.cus-scroll {
+/* .cus-scroll {
   overflow: auto;
   &::-webkit-scrollbar {
     width: 8px;
@@ -88,7 +88,7 @@ ol { @apply list-decimal list-inside }
       background: rgb(var(--primary-color));
     }
   }
-}
+} */
 
 /* 切换主题的动画效果 */
 ::view-transition-old(root),

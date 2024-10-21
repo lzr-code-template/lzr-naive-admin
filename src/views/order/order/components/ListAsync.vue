@@ -53,7 +53,7 @@
         :pagination="table.pagination"
         :min-height="`${clientHeight - filter.height - 280}`"
         :max-height="`${clientHeight - filter.height - 280}`"
-        :scroll-x="1024"
+        :scroll-x="1280"
         @update:filters="table.handleFiltersChange"
       />
     </section>
@@ -73,150 +73,205 @@ const params: ParamsInter = reactive({
   size: 20,
   currentPage: 1,
   name: '',
-  state: '',
+  state: '0',
 })
 const columns = [
   {
-    title: '商品信息',
-    align: 'center',
-    width: 400,
+    title: '订单信息',
+    width: 28,
     render(row: any) {
       return h(
         'div',
-        { class: 'f-s space-x-3' },
+        { class: 'space-y-1 text-left' },
         [
-          h('div', { class: 'shrink-0 w-20 h-20 rounded-md overflow-hidden' }, [
-            h('img', { alt: '商品图片', width: 80, height: 80, src: row.thumbnail, class: 'w-20 h-20 object-cover' }),
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400' }, '订单编号：'),
+            h('span', {}, row.id),
           ]),
-          h('div', { class: 'grow text-left' }, [
-            h(NEllipsis, { lineClamp: 2 }, row.name),
-            h('div', { class: 'mt-1 text-error' }, [
-              h('span', { class: 'text-base' }, row.bidprice),
-              h('span', { class: 'ml-1 text-xs' }, '日元'),
-            ]),
-            // h(NTag, { type: 'info', size: 'small' }, row.stateText || '未发货')
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400' }, '下单时间：'),
+            h('span', {}, row.inserttime),
           ]),
-          // h(NButton, {
-          //   type: 'primary',
-          //   text: true,
-          //   onClick: () => console.log('aa')
-          // }, {
-          //   default: () => '编辑'
-          // })
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400' }, '卖家名称：'),
+            h('span', {}, '卖家名称'),
+          ]),
+          h('p', { class: 'text-primary' }, [
+            h('span', { class: 'text-gray-400' }, '订单状态：'),
+            h('span', {}, row.stateText),
+          ]),
         ],
       )
     },
   },
   {
-    title: '订单编号',
-    key: 'id',
-    align: 'center',
+    title: '商品信息',
+    width: 45,
+    render(row: any) {
+      return h(
+        'div',
+        { class: 'f-s space-x-3' },
+        [
+          h('div', { class: 'shrink-0 w-18 h-18 rounded-md overflow-hidden' }, [
+            h('img', { alt: '商品图片', width: 72, height: 72, src: row.bidPre.thumbnail, class: 'w-20 h-20 object-cover' }),
+          ]),
+          h('div', { class: 'grow text-left' }, [
+            h(NEllipsis, { lineClamp: 2, class: 'h-11' }, {
+              default: () => row.bidPre.name,
+            }),
+            h('div', { class: 'mt-2 mb-1 text-error' }, [
+              h('span', { class: 'text-base' }, row.bidPre.bidprice),
+              h('span', { class: 'ml-1 text-xs' }, '日元'),
+            ]),
+            row.state === 4
+              ? h(NButton, {
+                'v-if': row.state === '4',
+                'type': 'primary',
+                'size': 'small',
+                'text': true,
+                'onClick': () => router.push(`/order/order/detail/${row.id}`),
+              }, {
+                default: () => '商品入库 >',
+              })
+              : false,
+          ]),
+        ],
+      )
+    },
   },
   {
-    title: '下单时间',
-    key: 'inserttime',
-    align: 'center',
+    title: '用户 / 收货人',
+    width: 35,
+    render() {
+      return h(
+        'div',
+        { class: 'space-y-1 text-left' },
+        [
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400' }, '下单用户：'),
+            h('span', {}, '大西瓜球'),
+          ]),
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400' }, '收货人：'),
+            h('span', {}, '李梓瑞 15166135648'),
+          ]),
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400' }, '收货地址：'),
+            h('span', {}, '山东省威海市环翠区皇冠街道青岛中路时代嘉园C栋2单元1603'),
+          ]),
+        ],
+      )
+    },
   },
   {
-    title: '总金额',
-    key: 'priceall',
-    align: 'center',
+    title: '支付金额',
+    width: 30,
+    render() {
+      return h(
+        'div',
+        { class: 'space-y-1 text-left' },
+        [
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400 w-[5.25rem] inline-block' }, '竞拍金额：'),
+            h('span', {}, '13200日元'),
+          ]),
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400 w-[5.25rem] inline-block' }, '日本邮费：'),
+            h('span', {}, '13200日元'),
+          ]),
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400 w-[5.25rem] inline-block' }, '增值服务费：'),
+            h('span', {}, '13200日元'),
+          ]),
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400 w-[5.25rem] inline-block' }, '固定服务费：'),
+            h('span', {}, '13200日元'),
+          ]),
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400 w-[5.25rem] inline-block' }, '保险费：'),
+            h('span', {}, '13200日元'),
+          ]),
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400 w-[5.25rem] inline-block' }, '仓储费：'),
+            h('span', {}, '13200日元'),
+          ]),
+          h('p', { class: '' }, [
+            h('span', { class: 'text-gray-400 w-[5.25rem] inline-block' }, '日本运费：'),
+            h('span', {}, '13200日元'),
+          ]),
+        ],
+      )
+    },
   },
-  {
-    title: '总金额（人民币）',
-    key: 'priceallrmb',
-    align: 'center',
-  },
-  {
-    title: '订单状态',
-    key: 'stateText',
-    align: 'center',
-  },
-  // {
-  //   title: "序号",
-  //   width: '70',
-  //   align: 'center',
-  //   render(_: object, index: number) { return `${(table.pagination.page - 1) * table.pagination.pageSize + index + 1 }` }
-  // },
-  // {
-  //   title: "ID",
-  //   key: "id",
-  //   align: 'center'
-  // },
-  // {
-  //   title: "姓名",
-  //   key: "name",
-  //   align: 'center'
-  // },
-  // {
-  //   title: "性别",
-  //   key: "gender",
-  //   align: 'center',
-  //   render(row: {
-  //     gender: number
-  //   }) { return ['女', '男'][row.gender] }
-  // },
-  // {
-  //   title: "手机号",
-  //   key: "mobile",
-  //   align: 'center'
-  // },
-  // {
-  //   title: "角色",
-  //   key: "rolename",
-  //   align: 'center'
-  // },
-  // {
-  //   title: "状态",
-  //   key: "zaixian",
-  //   align: 'center',
-  //   render(row: {
-  //     id: number
-  //     name: string
-  //     zaixian: string
-  //   }) {
-  //     return h(
-  //       NTag, {
-  //         class: '-ml-5',
-  //         size: 'small',
-  //         bordered: false,
-  //         type: +row.zaixian === 0 ? 'error' : 'success'
-  //       },{
-  //         default: () => +row.zaixian === 0 ? '禁用' : '启用'
-  //       }
-  //     )
-  //   },
-  //   filter: true,
-  //   filterMultiple: false,
-  //   filterOptionValue: null,
-  //   filterOptions: filter.zaixianOptions
-  // },
   {
     title: '操作',
     key: '',
-    align: 'center',
+    width: 15,
+    align: 'left',
     fixed: 'right',
-    render(row: {
-      id: number
-    }) {
+    render(row: any) {
       return h(
         'div',
-        { class: 'f-c-c space-x-2.5' },
+        { class: 'text-left' },
         [
-          h(NButton, {
-            type: 'primary',
-            text: true,
-            onClick: () => router.push(`/order/order/detail/${row.id}`),
-          }, {
-            default: () => '查看详情',
-          }),
+          h(
+            'div',
+            { class: 'mr-2 mb-1' },
+            h(NButton, {
+              type: 'primary',
+              text: true,
+              onClick: () => router.push(`/order/order/detail/${row.id}`),
+            }, {
+              default: () => '订单详情',
+            }),
+          ),
+          h(
+            'div',
+            { class: 'mr-2 mb-1' },
+            h(NButton, {
+              type: 'primary',
+              text: true,
+            }, {
+              default: () => '包裹详情',
+            }),
+          ),
+          h(
+            'div',
+            { class: 'mr-2 mb-1' },
+            h(NButton, {
+              type: 'primary',
+              text: true,
+            }, {
+              default: () => '包裹审核',
+            }),
+          ),
+          h(
+            'div',
+            { class: 'mr-2 mb-1' },
+            h(NButton, {
+              type: 'primary',
+              text: true,
+            }, {
+              default: () => '打印出货单',
+            }),
+          ),
+          h(
+            'div',
+            { class: 'mr-2 mb-1' },
+            h(NButton, {
+              type: 'primary',
+              text: true,
+            }, {
+              default: () => '国际快递单号',
+            }),
+          ),
         ],
       )
     },
   },
 ]
 /** section2 表单区 */
-const { table } = useTable('/order/getOrderPage', params, columns)
+const { table } = useTable('/order0/getOrderPage', params, columns)
 
 /** section1 筛选区 */
 const filterRef = ref<HTMLElement>()

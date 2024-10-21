@@ -30,7 +30,7 @@
   height: 14px;
   position: absolute;
   display: block;
-  background-color: #0064C8;
+  background-color: rgba(var(--primary-color));
   border-radius: 100%;
   transform: scale(.75);
   transform-origin: 50% 50%;

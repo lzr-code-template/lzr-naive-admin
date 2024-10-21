@@ -37,7 +37,7 @@ const clientHeight = useWindowSize().height
 		height: 14px;
 		position: absolute;
 		display: block;
-		background-color: #0064c8;
+		background-color: rgba(var(--primary-color));
 		border-radius: 100%;
 		transform: scale(0.75);
 		transform-origin: 50% 50%;
