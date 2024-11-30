@@ -16,10 +16,10 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronDownIcon, UserIcon } from '@heroicons/vue/24/solid'
-import { HomeIcon, PowerIcon } from '@heroicons/vue/24/outline'
-import { useUserStore } from '@/store'
 import avatarImg from '@/assets/images/logo.webp'
+import { useUserStore } from '@/store'
+import { HomeIcon, PowerIcon } from '@heroicons/vue/24/outline'
+import { ChevronDownIcon, UserIcon } from '@heroicons/vue/24/solid'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -41,7 +41,7 @@ const handleSelect = (key: string) => {
     router.push('/')
   }
   if (key === 'logout') {
-    window.$dialog?.info({
+    window.$dialog?.create({
       title: '提示',
       content: '您确定要退出登录吗',
       positiveText: '确定',

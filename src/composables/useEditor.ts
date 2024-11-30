@@ -60,14 +60,14 @@ export function useEditor(action = `${import.meta.env.VITE_APP_URL}/open/addpic`
     },
     customInsert(res: any, insertFn: InsertFnType) {
       if (res.code === 200) { insertFn(res.data, '图片', '') }
-      if (res.code !== 200) { ElMessage({ message: res.msg, type: 'error' }) }
+      if (res.code !== 200) { window.$message?.error(res.msg) }
     },
     onError(file: File) {
       if (file.size > 5120000) {
-        ElMessage({ message: '图片大小不得超过5MB', type: 'warning' })
+        window.$message?.warning('图片大小不得超过5MB')
         return
       }
-      ElMessage({ message: `${file.name} 上传出错`, type: 'error' })
+      window.$message?.error(`${file.name} 上传出错`)
     },
   }
 

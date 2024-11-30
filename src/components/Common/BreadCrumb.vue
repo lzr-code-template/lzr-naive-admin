@@ -43,8 +43,8 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronRightIcon } from '@heroicons/vue/24/solid'
 import { isNonEmptyArray } from '@/utils'
+import { ChevronRightIcon } from '@heroicons/vue/24/solid'
 
 const route = useRoute()
 const router = useRouter()
@@ -59,23 +59,24 @@ const handleDropSelect = (name: string) => {
 }
 
 const optionsList: any = reactive({
-  order: [
-    { label: '订单管理', key: 'OrderOrder' },
-  ],
-  webset: [
-    { label: '轮播图', key: 'WebsetSwiper' },
-    { label: '邮件模版', key: 'WebsetMail' },
-    { label: '文章管理', key: 'WebsetArticle' },
-    { label: '增值服务', key: 'WebsetAddserve' },
-  ],
-  user: [
-    { label: '用户列表', key: 'UserUser' },
-    { label: '身份证列表', key: 'UserIDcard' },
-  ],
-  system: [
-    { label: '角色管理', key: 'SystemRole' },
-    { label: '账号管理', key: 'SystemAccount' },
-  ],
+  // order: [
+  //   { label: '雅虎订单', key: 'OrderOrder' },
+  // ],
+  // webset: [
+  //   { label: '轮播图', key: 'WebsetSwiper' },
+  //   { label: '金刚区', key: 'WebsetKingkong' },
+  //   // { label: '邮件模版', key: 'WebsetMail' },
+  //   { label: '文章管理', key: 'WebsetArticle' },
+  //   { label: '增值服务', key: 'WebsetAddserve' },
+  // ],
+  // user: [
+  //   { label: '用户列表', key: 'UserUser' },
+  //   { label: '身份证列表', key: 'UserIDcard' },
+  // ],
+  // system: [
+  //   { label: '角色管理', key: 'SystemRole' },
+  //   { label: '账号管理', key: 'SystemAccount' },
+  // ],
 })
 </script>
 

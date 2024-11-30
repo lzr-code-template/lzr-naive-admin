@@ -4,11 +4,12 @@
       <div class="hidden bg-login bg-cover lg:block lg:w-2/3">
         <div class="flex h-full items-center bg-gray-900 bg-opacity-40 px-20">
           <div>
-            <h2 class="text-4xl font-bold text-white">LT转运后台管理系统</h2>
+            <h2 class="text-4xl font-bold text-white">lzr-naive-admin</h2>
             <p class="mt-3 max-w-xl text-t3">
-              When she was younger, she would pretend. That her bedroom was a castle, she
-              was fairest in the land. And she got older, and it all changed. There was no time for make believe and all
-              the magic slipped away
+              A minimalist admin template built with Vite + Vue3 + Pinia + TailwindCSS. Simple yet elegant, 
+              featuring a clean code style and refreshing page design. After dozens of iterations and 
+              refinements, it offers zero-coupling between modules and a flat routing design for maximum 
+              flexibility and ease of use.
             </p>
           </div>
         </div>

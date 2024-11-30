@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
+import LayoutContent from './content/LayoutContent.vue'
 import LayoutHeader from './header/LayoutHeader.vue'
 import LayoutSidebar from './sidebar/LayoutSidebar.vue'
-import LayoutContent from './content/LayoutContent.vue'
 </script>

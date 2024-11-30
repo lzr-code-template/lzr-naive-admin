@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { NConfigProvider, darkTheme, dateZhCN, zhCN } from 'naive-ui'
 import { useDarkStore, useThemeStore } from '@/store'
+import { darkTheme, dateZhCN, NConfigProvider, zhCN } from 'naive-ui'
 
 const themeStore = useThemeStore()
 const darkStore = useDarkStore()

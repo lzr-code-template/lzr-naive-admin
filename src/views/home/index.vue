@@ -22,7 +22,7 @@
       </div>
       <div class="grow">
         <n-card
-          title="✨ 欢迎使用「 LT转运后台管理系统 」"
+          title="✨ 欢迎使用「 lzr-naive-admin 」"
           class="h-full"
         >
           <p class="opacity-60">
@@ -139,8 +139,8 @@
 </template>
 
 <script setup lang="ts">
-import { useThemeStore, useUserStore } from '@/store'
 import avatarImg from '@/assets/images/logo.webp'
+import { useThemeStore, useUserStore } from '@/store'
 
 const userStore = useUserStore()
 const themeStore = useThemeStore()

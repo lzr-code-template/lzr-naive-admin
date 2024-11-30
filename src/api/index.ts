@@ -1,8 +1,8 @@
-import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, CustomParamsSerializer } from 'axios'
-import { parse, stringify } from 'qs'
-import { createDiscreteApi } from 'naive-ui'
 import { router } from '@/router'
+import axios from 'axios'
+// import { createDiscreteApi } from 'naive-ui'
+import { parse, stringify } from 'qs'
 
 // const { message, dialog } = createDiscreteApi(['message', 'dialog'])
 
@@ -37,15 +37,19 @@ http.interceptors.response.use(
     if (res.data.code === 200) {
       return res.data
     }
-    if (res.data.code === 404) {
-      window.$message?.warning(res.data.msg)
+    else if (res.data.code === 404) {
+      window.$message?.destroyAll()
+      window.$message?.warning(res.data.msg || '操作失败')
       return res.data
+    }
+    else {
+      window.$message?.destroyAll()
     }
   },
   (error) => {
-    if (error.response.status === 401 && localStorage.getItem('token')) {
+    if (error?.response?.status === 401 && localStorage.getItem('token')) {
       ['token', 'user'].forEach(item => localStorage.removeItem(item))
-      window.$dialog?.info({
+      window.$dialog?.create({
         title: '提示',
         content: '登录超时，请重新登录',
         positiveText: '确定',

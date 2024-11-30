@@ -1,7 +1,3 @@
-import order from './order'
-import user from './user'
-import webset from './webset'
-import system from './system'
 import ErrorPage from '@/views/error-page/404.vue'
 import Layout from '@/layout/index.vue'
 import type { RouteModule, RouteType, RoutesType } from '@/types/router.ts'
@@ -37,14 +33,6 @@ export const basicRoutes: RoutesType = [
           keepAlive: false,
         },
       },
-      /** --- 订单管理 --- */
-      ...order,
-      /** --- 用户管理 --- */
-      ...user,
-      /** --- 网站管理 --- */
-      ...webset,
-      /** --- 系统管理 --- */
-      ...system,
     ],
   },
   {

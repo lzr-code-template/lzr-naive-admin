@@ -16,9 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import '@wangeditor/editor/dist/css/style.css' // 引入 css
-import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { useEditor } from '@/composables/useEditor'
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+import '@wangeditor/editor/dist/css/style.css' // 引入 css
 
 const props = defineProps({
   modelValue: String,

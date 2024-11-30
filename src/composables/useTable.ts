@@ -1,5 +1,5 @@
-import { pickBy } from 'lodash-es'
 import api from '@/api/index'
+import { pickBy } from 'lodash-es'
 
 interface ParamsInter {
   size: number
@@ -15,19 +15,21 @@ interface TableInter {
   [key: string]: any
 }
 
-export function useTable(url: string, params: ParamsInter, columns: Array<any>, next: any = {}) {
+export function useTable(initUrl: string, params: ParamsInter, columns: Array<any>, next: any = {}) {
   // 表格数据
   const table: TableInter = reactive({
     loading: true,
     list: [],
+    url: initUrl,
     getList: (more = true) => {
       if (!more) { params.currentPage = table.pagination.page = 1 }
-      api.get(url, pickBy(params, (value: ParamsInter) => {
+      api.get(table.url, pickBy(params, (value: ParamsInter) => {
         return typeof (value) === 'number' && value === 0 || Boolean(value)
       })).then((res) => {
         if (res.code === 200) {
           table.pagination.itemCount = res.data.total
           table.list = res.data.records || []
+          console.log(res.data.records[0])
         }
         else {
           table.pagination.itemCount = 0
